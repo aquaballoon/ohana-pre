@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohana English — Pre-Level | CEFR Pre-A1</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <style>
+    :root {
+      --brand:        #fb7185;
+      --brand-dark:   #be123c;
+      --brand-mid:    #f43f5e;
+      --brand-light:  #fff1f2;
+      --brand-border: #fecdd3;
+      --accent:       #fbbf24;
+      --accent-light: #fef3c7;
+      --green:        #34d399;
+      --green-light:  #d1fae5;
+      --purple:       #a78bfa;
+      --purple-light: #ede9fe;
+      --page-bg:      #fff8f0;
+    }
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Quicksand', sans-serif; background: var(--page-bg); }
+
+    /* ── Animations ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50%       { transform: translateY(-14px) rotate(3deg); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251,113,133,0.4); }
+      50%       { box-shadow: 0 0 0 12px rgba(251,113,133,0); }
+    }
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pop-in {
+      0%   { transform: scale(0.8); opacity: 0; }
+      70%  { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes wave {
+      0%, 100% { transform: rotate(0deg); }
+      25%       { transform: rotate(15deg); }
+      75%       { transform: rotate(-10deg); }
+    }
+
+    .float        { animation: float 3s ease-in-out infinite; }
+    .float-slow   { animation: float-slow 4s ease-in-out infinite; }
+    .float-delay  { animation: float 3.5s ease-in-out 0.5s infinite; }
+    .pulse-glow   { animation: pulse-glow 2s ease-in-out infinite; }
+    .slide-up     { animation: slide-up 0.6s ease-out both; }
+    .pop-in       { animation: pop-in 0.5s ease-out both; }
+    .wave-anim    { animation: wave 1.2s ease-in-out infinite; display: inline-block; }
+
+    .shimmer-text {
+      background: linear-gradient(90deg, var(--brand-dark) 0%, var(--brand-mid) 30%, #ff8fab 50%, var(--brand-mid) 70%, var(--brand-dark) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* ── Hero ── */
+    .hero-gradient {
+      background: linear-gradient(135deg, #fff1f2 0%, #fff8f0 40%, #fef3c7 100%);
+    }
+    .hero-blob {
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(251,113,133,0.15) 0%, transparent 70%);
+    }
+
+    /* ── Cards ── */
+    .chapter-card {
+      background: #fff;
+      border-radius: 1.25rem;
+      border: 2px solid var(--brand-border);
+      transition: all 0.25s ease;
+      text-decoration: none;
+      display: block;
+      overflow: hidden;
+      position: relative;
+    }
+    .chapter-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand);
+      box-shadow: 0 12px 32px rgba(251,113,133,0.2);
+    }
+    .chapter-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1.2rem;
+      background: linear-gradient(180deg, transparent 60%, rgba(251,113,133,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .feature-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      border: 2px solid transparent;
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .outcome-chip {
+      background: #fff;
+      border-radius: 999px;
+      border: 2px solid var(--brand-border);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--brand-dark);
+      white-space: nowrap;
+    }
+
+    .stat-box {
+      background: #fff;
+      border-radius: 1.25rem;
+      border: 2px solid var(--brand-border);
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    /* ── Badge ── */
+    .cefr-badge {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      display: inline-block;
+    }
+
+    /* ── Section divider ── */
+    .wave-divider {
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    /* ── Tag strip (letter display) ── */
+    .letter-tag {
+      background: var(--brand-light);
+      color: var(--brand-dark);
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.15rem 0.5rem;
+      display: inline-block;
+    }
+
+    /* ── Scroll fade-in observer ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── CTA button ── */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 700;
+      padding: 0.85rem 2.2rem;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(251,113,133,0.4);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(251,113,133,0.5);
+    }
+  </style>
+</head>
+
+<body x-data="{ activeFilter: 'all' }">
+
+<!-- ════════════════════════════ HEADER ════════════════════════════ -->
+<header style="background:#fff; border-bottom: 1px solid #fecdd3;" class="sticky top-0 z-50" style="box-shadow: 0 2px 8px rgba(251,113,133,0.08);">
+  <div class="max-w-4xl mx-auto px-5 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span style="font-size:1.5rem;">🌺</span>
+      <span style="font-weight:800; font-size:1.1rem; color:#be123c;">Ohana English</span>
+      <span style="color:#fecdd3; margin:0 4px;">|</span>
+      <span style="font-weight:600; color:#fb7185; font-size:0.95rem;">Pre-Level</span>
+    </div>
+    <span class="cefr-badge">CEFR Pre-A1</span>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════ HERO ════════════════════════════ -->
+<section class="hero-gradient relative overflow-hidden" style="padding: 5rem 1.25rem 4rem;">
+
+  <!-- background blobs -->
+  <div class="hero-blob absolute inset-0 pointer-events-none"></div>
+  <div class="float-slow absolute" style="top:8%; right:6%; font-size:4rem; opacity:0.35;">🌟</div>
+  <div class="float absolute" style="top:20%; left:4%; font-size:3rem; opacity:0.3;">🎈</div>
+  <div class="float-delay absolute" style="bottom:18%; right:10%; font-size:3.5rem; opacity:0.28;">🦋</div>
+  <div class="float absolute" style="bottom:10%; left:8%; font-size:2.5rem; opacity:0.25;">🎵</div>
+
+  <div class="max-w-3xl mx-auto text-center relative z-10">
+
+    <!-- eyebrow -->
+    <div class="pop-in" style="animation-delay:0.1s; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; gap:0.6rem; flex-wrap:wrap;">
+      <span class="cefr-badge">✦ CEFR Pre-A1 Aligned</span>
+      <span style="background:var(--accent-light); color:#92400e; border-radius:999px; padding:0.35rem 1rem; font-weight:700; font-size:0.85rem;">12 Chapters · 35 min/class</span>
+    </div>
+
+    <!-- headline -->
+    <h1 class="slide-up shimmer-text" style="font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight:800; line-height:1.15; margin-bottom:1.25rem; animation-delay:0.2s;">
+      Every Big Journey<br>Starts with One Letter
+    </h1>
+
+    <!-- sub-headline -->
+    <p class="slide-up" style="animation-delay:0.35s; font-size:1.15rem; color:#64748b; font-weight:500; max-width:560px; margin:0 auto 2rem; line-height:1.7;">
+      <span class="wave-anim">👋</span>&nbsp; <strong style="color:#be123c;">Ohana English Pre-Level</strong> gives young learners the phonics foundation,
+      everyday communication skills, and confidence to step into the world of English —
+      one fun activity at a time.
+    </p>
+
+    <!-- CTA -->
+    <div class="slide-up" style="animation-delay:0.5s; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+      <a href="#chapters" class="btn-primary" style="animation: pulse-glow 2s ease-in-out infinite;">
+        🎯 Start Learning
+      </a>
+      <a href="#outcomes" style="border:2px solid var(--brand); color:var(--brand-dark); border-radius:999px; font-weight:700; padding:0.85rem 2rem; font-size:1rem; display:inline-flex; align-items:center; gap:0.4rem; transition:all 0.2s; text-decoration:none;"
+         onmouseover="this.style.background='var(--brand-light)'"
+         onmouseout="this.style.background='transparent'">
+        ✨ See Outcomes
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ STATS ROW ════════════════════════════ -->
+<section style="background:#fff; padding:2.5rem 1.25rem;">
+  <div class="max-w-4xl mx-auto">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:1rem;">
+
+      <div class="stat-box reveal">
+        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">26</div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Letters A–Z</div>
+        <div style="font-size:1.4rem; margin-top:4px;">🔤</div>
+      </div>
+
+      <div class="stat-box reveal" style="animation-delay:0.1s;">
+        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">80<span style="font-size:1.2rem;">+</span></div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Phonics Words</div>
+        <div style="font-size:1.4rem; margin-top:4px;">🔊</div>
+      </div>
+
+      <div class="stat-box reveal" style="animation-delay:0.15s;">
+        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">50<span style="font-size:1.2rem;">+</span></div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Daily Expressions</div>
+        <div style="font-size:1.4rem; margin-top:4px;">💬</div>
+      </div>
+
+      <div class="stat-box reveal" style="animation-delay:0.2s;">
+        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">44</div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Sight Words</div>
+        <div style="font-size:1.4rem; margin-top:4px;">👁️</div>
+      </div>
+
+      <div class="stat-box reveal" style="animation-delay:0.25s;">
+        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">200<span style="font-size:1.2rem;">+</span></div>
+        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Total Words</div>
+        <div style="font-size:1.4rem; margin-top:4px;">🏆</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ WHY OHANA ════════════════════════════ -->
+<section style="background:var(--page-bg); padding:4rem 1.25rem;">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
+      <p style="font-weight:700; color:var(--brand); font-size:0.9rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">Why Ohana English?</p>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; color:#1e293b; line-height:1.2;">Learning That Kids Actually Love</h2>
+      <p style="color:#64748b; margin-top:0.75rem; font-weight:500; max-width:480px; margin-left:auto; margin-right:auto;">No boring textbooks. No passive sit-and-listen. Every lesson is built around activities and games that keep young learners fully engaged.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:1.25rem;">
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--brand-border);">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎮</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">Game-Based Activities</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">Every chapter includes <strong>Tracing Game</strong>, <strong>Memory Game</strong>, and <strong>Picture Match</strong> — interactive challenges built right into the lesson.</p>
+      </div>
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--green); animation-delay:0.1s;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🎵</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">Music & Songs</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">Children absorb language through rhythm. Every chapter features a curated English song with lyrics, boosting vocabulary retention and pronunciation naturally.</p>
+      </div>
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--purple); animation-delay:0.2s;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🗣️</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">Speak from Day One</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">Echo Practice and Read-Aloud exercises build real speaking confidence. Kids don't just memorize — they <em>use</em> English from the very first class.</p>
+      </div>
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--accent); animation-delay:0.3s;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔤</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">Phonics + Communication</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">A unique dual-track design teaches the alphabet and phonics <em>alongside</em> real everyday conversations — so learners build both literacy and fluency at once.</p>
+      </div>
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--brand-border); animation-delay:0.1s;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🌍</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">CEFR International Standard</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">Aligned to <strong>CEFR Pre-A1</strong>, the globally recognized framework used by schools and institutions worldwide. Your child's progress is measured by a universal benchmark.</p>
+      </div>
+
+      <div class="feature-card reveal" style="padding:1.75rem; border-color:var(--green); animation-delay:0.2s;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🚀</div>
+        <h3 style="font-weight:800; color:#1e293b; margin-bottom:0.5rem; font-size:1.05rem;">Smooth Bridge to Level 1</h3>
+        <p style="color:#64748b; font-size:0.9rem; line-height:1.6;">Every Pre-Level topic is carefully mapped to Level 1 (CEFR A1) chapters, ensuring a natural, stress-free transition into the next stage of learning.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ OUTCOMES ════════════════════════════ -->
+<section id="outcomes" style="background:#fff; padding:4rem 1.25rem;">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
+      <p style="font-weight:700; color:var(--brand); font-size:0.9rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">Learning Outcomes</p>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; color:#1e293b; line-height:1.2;">What Your Child Can Do<br>After Completing Pre-Level</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-bottom:2.5rem;">
+
+      <!-- Literacy -->
+      <div class="reveal" style="background:var(--brand-light); border-radius:1.5rem; padding:1.75rem; border:2px solid var(--brand-border);">
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
+          <span style="font-size:1.75rem;">📖</span>
+          <span style="font-weight:800; color:var(--brand-dark); font-size:1rem;">Literacy</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
+            Recognize and write all 26 letters (uppercase & lowercase)
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
+            Sound out 13 key phonics sounds with correct pronunciation
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
+            Read 44 sight words independently (the, a, I, am, you, is, in…)
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
+            Blend CVC words: <em>cat, bag, pin, hot, sun</em>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Communication -->
+      <div class="reveal" style="background:var(--green-light); border-radius:1.5rem; padding:1.75rem; border:2px solid #a7f3d0; animation-delay:0.1s;">
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
+          <span style="font-size:1.75rem;">💬</span>
+          <span style="font-weight:800; color:#065f46; font-size:1rem;">Communication</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
+            Introduce themselves: <em>"Hello! My name is ___."</em>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
+            Express feelings: <em>"I'm happy / sad / fine."</em>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
+            Name colors, animals, food, body parts, days of the week
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
+            Count from 1 to 10 and ask <em>"How many?"</em>
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
+            Talk about the weather and classroom objects
+          </li>
+        </ul>
+      </div>
+
+      <!-- Ready for Level 1 -->
+      <div class="reveal" style="background:var(--purple-light); border-radius:1.5rem; padding:1.75rem; border:2px solid #ddd6fe; animation-delay:0.2s;">
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
+          <span style="font-size:1.75rem;">🚀</span>
+          <span style="font-weight:800; color:#4c1d95; font-size:1rem;">Ready for Level 1</span>
+        </div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
+            Knows 200+ words and expressions across 10 topics
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
+            Sing along to English songs and follow rhythm patterns
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
+            Confident speaking voice — zero fear of trying English
+          </li>
+          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
+            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
+            Fully prepared for CEFR A1 (Level 1: Starter)
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ CHAPTER GRID ════════════════════════════ -->
+<section id="chapters" style="background:var(--page-bg); padding:4rem 1.25rem 5rem;">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
+      <p style="font-weight:700; color:var(--brand); font-size:0.9rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">All Chapters</p>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; color:#1e293b; line-height:1.2;">12 Chapters, 12 Adventures</h2>
+      <p style="color:#64748b; margin-top:0.75rem; font-weight:500;">Click any chapter to open the interactive lesson.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:1rem;">
+
+      <!-- Ch 1 -->
+      <a href="pre_ch1.html" class="chapter-card reveal">
+        <div style="background:linear-gradient(135deg,#fff1f2,#fce7f3); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:0.06em;">Ch. 01</span>
+            <span style="font-size:1.4rem;">👋</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">A</span><span class="letter-tag">B</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Hello, World!</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Hello · My name is · /æ/ /b/</div>
+        </div>
+      </a>
+
+      <!-- Ch 2 -->
+      <a href="pre_ch2.html" class="chapter-card reveal" style="animation-delay:0.05s;">
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a22); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#d97706; text-transform:uppercase; letter-spacing:0.06em;">Ch. 02</span>
+            <span style="font-size:1.4rem;">🔢</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">C</span><span class="letter-tag">D</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Numbers 1–5</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">One to five · /k/ /d/</div>
+        </div>
+      </a>
+
+      <!-- Ch 3 -->
+      <a href="pre_ch3.html" class="chapter-card reveal" style="animation-delay:0.1s;">
+        <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d033); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#059669; text-transform:uppercase; letter-spacing:0.06em;">Ch. 03</span>
+            <span style="font-size:1.4rem;">😊</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">E</span><span class="letter-tag">F</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">How Are You?</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Feelings · Happy / Sad · /e/ /f/</div>
+        </div>
+      </a>
+
+      <!-- Ch 4 -->
+      <a href="pre_ch4.html" class="chapter-card reveal" style="animation-delay:0.15s;">
+        <div style="background:linear-gradient(135deg,#ede9fe,#ddd6fe33); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.06em;">Ch. 04</span>
+            <span style="font-size:1.4rem;">🌈</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">G</span><span class="letter-tag">H</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Colors</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Red, Blue, Yellow, Green · /g/ /h/</div>
+        </div>
+      </a>
+
+      <!-- Ch 5 -->
+      <a href="pre_ch5.html" class="chapter-card reveal" style="animation-delay:0.05s;">
+        <div style="background:linear-gradient(135deg,#fce7f3,#fbcfe833); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#be185d; text-transform:uppercase; letter-spacing:0.06em;">Ch. 05</span>
+            <span style="font-size:1.4rem;">👨‍👩‍👧</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">I</span><span class="letter-tag">J</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">My Family</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Mom, Dad, Sister, Brother · /ɪ/ /dʒ/</div>
+        </div>
+      </a>
+
+      <!-- Ch 6 -->
+      <a href="pre_ch6.html" class="chapter-card reveal" style="animation-delay:0.1s;">
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a33); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#b45309; text-transform:uppercase; letter-spacing:0.06em;">Ch. 06</span>
+            <span style="font-size:1.4rem;">🔢</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">K</span><span class="letter-tag">L</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Numbers 6–10</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Six to Ten · How many? · /k/ /l/</div>
+        </div>
+      </a>
+
+      <!-- Ch 7 -->
+      <a href="pre_ch7.html" class="chapter-card reveal" style="animation-delay:0.15s;">
+        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae533); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#047857; text-transform:uppercase; letter-spacing:0.06em;">Ch. 07</span>
+            <span style="font-size:1.4rem;">🙌</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">M</span><span class="letter-tag">N</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">My Body</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Head, Hand, Eye, Nose · /m/ /n/</div>
+        </div>
+      </a>
+
+      <!-- Ch 8 -->
+      <a href="pre_ch8.html" class="chapter-card reveal" style="animation-delay:0.05s;">
+        <div style="background:linear-gradient(135deg,#fff1f2,#fecdd333); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--brand-dark); text-transform:uppercase; letter-spacing:0.06em;">Ch. 08</span>
+            <span style="font-size:1.4rem;">🐾</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">O</span><span class="letter-tag">P</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Animals</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Cat, Dog, Bird, Fish · /ɒ/ /p/</div>
+        </div>
+      </a>
+
+      <!-- Ch 9 -->
+      <a href="pre_ch9.html" class="chapter-card reveal" style="animation-delay:0.1s;">
+        <div style="background:linear-gradient(135deg,#fef9ee,#fde68a22); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#92400e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 09</span>
+            <span style="font-size:1.4rem;">🍎</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">Q</span><span class="letter-tag">R</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Food & Drinks</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Apple, Milk, Rice, Bread · /kw/ /r/</div>
+        </div>
+      </a>
+
+      <!-- Ch 10 -->
+      <a href="pre_ch10.html" class="chapter-card reveal" style="animation-delay:0.15s;">
+        <div style="background:linear-gradient(135deg,#eff6ff,#bfdbfe33); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:0.06em;">Ch. 10</span>
+            <span style="font-size:1.4rem;">🏫</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">S</span><span class="letter-tag">T</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Classroom</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Book, Pen, Desk, Bag · /s/ /t/</div>
+        </div>
+      </a>
+
+      <!-- Ch 11 -->
+      <a href="pre_ch11.html" class="chapter-card reveal" style="animation-delay:0.05s;">
+        <div style="background:linear-gradient(135deg,#f0fdfa,#ccfbf133); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#0f766e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 11</span>
+            <span style="font-size:1.4rem;">🌤️</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">U</span><span class="letter-tag">V</span><span class="letter-tag">W</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Weather</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Sunny, Rainy, Windy, Hot · /ʌ/ /v/ /w/</div>
+        </div>
+      </a>
+
+      <!-- Ch 12 -->
+      <a href="pre_ch12.html" class="chapter-card reveal" style="animation-delay:0.1s;">
+        <div style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff33); padding:1.25rem 1.25rem 0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span style="font-size:0.75rem; font-weight:700; color:#7e22ce; text-transform:uppercase; letter-spacing:0.06em;">Ch. 12</span>
+            <span style="font-size:1.4rem;">📅</span>
+          </div>
+          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
+            <span class="letter-tag">X</span><span class="letter-tag">Y</span><span class="letter-tag">Z</span>
+          </div>
+        </div>
+        <div style="padding:0.75rem 1.25rem 1rem;">
+          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Days of the Week</div>
+          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Monday–Sunday · /ks/ /j/ /z/</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Progress indicator -->
+    <div class="reveal" style="margin-top:2rem; background:#fff; border-radius:1.25rem; border:2px solid var(--brand-border); padding:1.25rem 1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="font-size:0.85rem; font-weight:700; color:#1e293b;">A–Z Complete!</span>
+          <span style="font-size:0.85rem; font-weight:700; color:var(--brand-dark);">12 / 12</span>
+        </div>
+        <div style="background:#fce7eb; border-radius:999px; height:10px; overflow:hidden;">
+          <div style="background:linear-gradient(90deg,var(--brand),var(--brand-dark)); border-radius:999px; height:100%; width:100%; transition:width 1s ease;"></div>
+        </div>
+        <p style="font-size:0.78rem; color:#94a3b8; margin-top:0.4rem; font-weight:500;">All 26 letters covered across 12 chapters</p>
+      </div>
+      <div>
+        <span style="background:var(--brand); color:#fff; border-radius:999px; font-weight:700; font-size:0.85rem; padding:0.4rem 1rem; display:inline-block;">🎉 Full Alphabet Journey</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
+<footer style="background:#1e293b; color:#94a3b8; padding:2.5rem 1.25rem; text-align:center;">
+  <div class="max-w-4xl mx-auto">
+    <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.75rem;">
+      <span style="font-size:1.5rem;">🌺</span>
+      <span style="font-weight:800; font-size:1.1rem; color:#fff;">Ohana English</span>
+    </div>
+    <p style="font-size:0.85rem; margin-bottom:0.5rem;">Pre-Level · CEFR Pre-A1 · Designed for Young Learners</p>
+    <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; font-size:0.8rem;">
+      <span style="background:#334155; border-radius:999px; padding:0.25rem 0.75rem; font-weight:600; color:#e2e8f0;">26 Letters</span>
+      <span style="background:#334155; border-radius:999px; padding:0.25rem 0.75rem; font-weight:600; color:#e2e8f0;">80+ Phonics Words</span>
+      <span style="background:#334155; border-radius:999px; padding:0.25rem 0.75rem; font-weight:600; color:#e2e8f0;">50+ Expressions</span>
+      <span style="background:#334155; border-radius:999px; padding:0.25rem 0.75rem; font-weight:600; color:#e2e8f0;">44 Sight Words</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════ SCROLL REVEAL ════════════════════════════ -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
