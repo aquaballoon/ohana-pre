@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Level Ch.3 — E and F | Ohana English</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS v4 (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Alpine.js v3 (CDN) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- canvas-confetti (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%       { transform: translateX(-6px); }
+      40%       { transform: translateX(6px); }
+      60%       { transform: translateX(-4px); }
+      80%       { transform: translateX(4px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    @keyframes bounce-in {
+      0%   { transform: scale(0.8); opacity: 0; }
+      60%  { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .bounce-in { animation: bounce-in 0.4s ease-out forwards; }
+
+    [x-cloak] { display: none !important; }
+    /* ── Tone Pre tokens ── */
+    .bg-page          { background-color: #fff8f0; }
+    .bg-brand         { background-color: #fb7185; }
+    .bg-brand-light   { background-color: #fff1f2; }
+    .bg-brand-dark    { background-color: #be123c; }
+    .text-brand       { color: #fb7185; }
+    .text-brand\/70  { color: rgba(251,113,133,0.7); }
+    .text-brand-dark  { color: #be123c; }
+    .text-brand-light { color: #fff1f2; }
+    .text-white\/70  { color: rgba(255,255,255,0.7); }
+    .border-brand        { border-color: #fb7185; }
+    .border-brand-border { border-color: #fecdd3; }
+    .ring-brand          { --tw-ring-color: #fb7185; }
+    .rounded-card { border-radius: 1.5rem; }
+    .shadow-card  { box-shadow: 0 4px 12px rgba(251,113,133,0.10); }
+    .hover\:bg-brand:hover       { background-color: #fb7185; }
+    .hover\:bg-brand-dark:hover  { background-color: #be123c; }
+    .hover\:bg-brand-light:hover { background-color: #fff1f2; }
+    .hover\:text-brand:hover     { color: #fb7185; }
+    .hover\:border-brand:hover   { border-color: #fb7185; }
+    .focus\:border-brand:focus   { border-color: #fb7185; }
+    .font-display { font-family: 'Quicksand', sans-serif; }
+    .font-body    { font-family: 'Quicksand', sans-serif; }
+    .font-game    { font-family: 'Quicksand', sans-serif; }
+
+    /* Card 3D flip */
+    .flip-card { perspective: 600px; }
+    .flip-inner { transition: transform 0.35s ease; transform-style: preserve-3d; }
+    .flip-front, .flip-back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .flip-back { transform: rotateY(180deg); }
+
+    canvas { touch-action: none; }
+  </style>
+</head>
+
+<body class="bg-page font-body min-h-screen">
+<div x-data="appRoot()" x-cloak>
+
+<!-- ═══════════════════════════════════════════ HEADER ═══ -->
+<header class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-2xl mx-auto px-4 py-3">
+    <div class="flex items-center justify-between mb-2">
+      <div class="flex items-center gap-3">
+        <svg width="36" height="36" viewBox="0 0 80 80" aria-hidden="true">
+          <circle cx="40" cy="40" r="38" fill="none" stroke="#fb7185" stroke-width="3"/>
+          <circle cx="40" cy="40" r="32" fill="#fb7185"/>
+          <path d="M22,40 Q31,32 40,40 Q49,32 58,40 L58,52 Q49,44 40,52 Q31,44 22,52 Z" fill="white" opacity="0.92"/>
+          <line x1="40" y1="40" x2="40" y2="52" stroke="#fb7185" stroke-width="2"/>
+          <circle cx="40" cy="24" r="3.5" fill="#f59e0b"/>
+          <circle cx="30" cy="27" r="2" fill="#f59e0b" opacity="0.6"/>
+          <circle cx="50" cy="27" r="2" fill="#f59e0b" opacity="0.6"/>
+        </svg>
+        <div>
+          <p class="font-display font-bold text-sm tracking-widest text-slate-800 uppercase">Ohana English</p>
+          <p class="text-xs text-slate-400 font-body">
+            <span class="text-brand font-medium">Pre-Level</span>
+            <span class="mx-1">·</span>Chapter 3
+          </p>
+        </div>
+      </div>
+      <span class="text-xs font-medium text-brand bg-brand-light px-2.5 py-1 rounded-full">
+        <span x-text="progressPct">0</span>% Complete
+      </span>
+    </div>
+    <h1 class="font-display font-bold text-lg text-slate-900 mb-2">E and F</h1>
+    <div class="w-full bg-slate-100 rounded-full h-2" role="progressbar" :aria-valuenow="progressPct" aria-valuemax="100">
+      <div class="bg-brand h-2 rounded-full transition-all duration-500" :style="'width:' + progressPct + '%'"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ LESSON OUTCOMES ═══ -->
+<div class="max-w-2xl mx-auto px-4 pt-5 pb-2" x-data="{ loExpanded: false }">
+  <div class="rounded-card overflow-hidden border-2 border-brand-border shadow-card">
+    <button @click="loExpanded = !loExpanded"
+            class="w-full bg-brand px-5 py-3 flex items-center justify-between hover:bg-brand-dark transition-colors duration-200"
+            :aria-expanded="loExpanded" aria-controls="lo-detail">
+      <div class="flex items-center gap-2">
+        <span class="text-white text-sm" aria-hidden="true">📌</span>
+        <p class="font-display font-bold text-white text-sm tracking-wide">Lesson Outcomes</p>
+        <span class="text-[10px] font-body font-semibold text-white/70 border border-brand rounded-full px-2 py-0.5 ml-1">CEFR Pre-A1</span>
+      </div>
+      <svg :class="loExpanded ? 'rotate-180' : ''" class="w-4 h-4 text-white/70 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+    <div class="bg-brand-light border-b border-brand-border px-5 py-2">
+      <p class="text-[10px] font-body text-brand/70 tracking-wide">✦ Aligned with CEFR International Language Standards</p>
+    </div>
+    <div id="lo-detail"
+         x-show="loExpanded"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-1"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-1">
+      <table class="w-full bg-white">
+        <tbody class="divide-y divide-slate-100">
+          <tr>
+            <td class="px-5 py-3 text-sm font-body text-brand font-semibold w-2/5">🎯 I can say</td>
+            <td class="px-5 py-3 text-sm font-body text-slate-700">the sounds /e/ and /f/</td>
+          </tr>
+          <tr class="bg-slate-50/50">
+            <td class="px-5 py-3 text-sm font-body text-brand font-semibold">🎯 I can read</td>
+            <td class="px-5 py-3 text-sm font-body text-slate-700">6 words with /e/ and /f/ sounds</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-3 text-sm font-body text-brand font-semibold">🎯 I can write</td>
+            <td class="px-5 py-3 text-sm font-body text-slate-700">uppercase E, F and lowercase e, f</td>
+          </tr>
+          <tr class="bg-amber-50/60">
+            <td class="px-5 py-3 text-xs font-body text-amber-700 font-semibold uppercase tracking-wide">📝 New words</td>
+            <td class="px-5 py-3 text-sm font-body text-amber-800 font-semibold">6 words</td>
+          </tr>
+          <tr class="bg-amber-50/40">
+            <td class="px-5 py-3 text-xs font-body text-amber-700 font-semibold uppercase tracking-wide">👁 Sight words</td>
+            <td class="px-5 py-3 text-sm font-body text-amber-800 font-semibold">2 words (and, in)</td>
+          </tr>
+          <tr class="bg-slate-50">
+            <td class="px-5 py-3 text-xs font-body text-slate-400 font-semibold uppercase tracking-wide">⏱ Lesson time</td>
+            <td class="px-5 py-3 text-sm font-body text-slate-500">~30 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── STEP INDICATOR ── -->
+<div class="max-w-2xl mx-auto px-4 pt-3">
+  <div class="flex items-center gap-0.5 md:gap-1.5 px-2 md:px-4 py-2 bg-slate-50/80 border border-slate-100 rounded-card">
+    <template x-for="(t, i) in tabs" :key="i">
+      <div class="flex items-center gap-0.5 md:gap-1">
+        <div :class="$store.nav.tab === t.id
+              ? 'w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand text-white shadow-sm'
+              : completedTabs.has(t.id)
+                ? 'w-5 h-5 md:w-6 md:h-6 rounded-full bg-emerald-100 text-emerald-600'
+                : 'w-5 h-5 md:w-6 md:h-6 rounded-full bg-slate-200 text-slate-400'"
+             class="text-xs flex items-center justify-center font-bold font-body transition-all duration-200 shrink-0"
+             x-text="completedTabs.has(t.id) ? '✓' : (i + 1)">
+        </div>
+        <div x-show="i < tabs.length - 1" class="w-2 md:w-5 h-px bg-slate-200 shrink-0"></div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ TAB BAR ═══ -->
+<div class="sticky top-[72px] z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
+  <div class="max-w-2xl mx-auto px-4">
+    <div class="flex gap-1 overflow-x-auto py-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+      <template x-for="t in tabs" :key="t.id">
+        <button @click="window.setTab(t.id)"
+                :class="$store.nav.tab === t.id ? 'bg-brand text-white shadow-sm' : 'text-slate-500 hover:text-brand hover:bg-brand-light'"
+                class="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 min-h-[36px]"
+                :aria-label="t.label + ' tab'">
+          <span x-text="t.label"></span>
+          <span x-show="completedTabs.has(t.id)" class="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>
+        </button>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ TAB CONTENTS ═══ -->
+<div class="max-w-2xl mx-auto px-4 py-8 pb-16">
+
+  <!-- ───────────────────────── TAB 1: Letter ───── -->
+  <div x-show="$store.nav.tab === 'letter'"
+>
+
+    <!-- ════ LETTER 1: Ee ════ -->
+    <div class="mb-8">
+      <h2 class="font-display font-bold text-xl text-slate-800 mb-4">Letter Ee</h2>
+
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Uppercase E -->
+        <button @click="speak('e'); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear E">
+          <span class="font-display font-black text-7xl text-brand leading-none mb-2">E</span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Uppercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+        <!-- Lowercase e -->
+        <button @click="speak('e'); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear e">
+          <span class="font-display font-black text-7xl text-brand/70 leading-none mb-2">e</span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Lowercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+      </div>
+
+      <!-- Stroke Order — Uppercase E -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData['E'] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Uppercase E</p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for uppercase E" x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stroke Order — Lowercase e -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData['e'] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Lowercase e</p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for lowercase e" x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracing E -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-4" x-data="tracingGame('E')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter E</p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+
+      <!-- Tracing e -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-2" x-data="tracingGame('e')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter e</p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+    </div><!-- /Ee section -->
+
+    <!-- ════ LETTER 2: Ff ════ -->
+    <div class="mb-8">
+      <h2 class="font-display font-bold text-xl text-slate-800 mb-4">Letter Ff</h2>
+
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Uppercase F -->
+        <button @click="speak('f'); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear F">
+          <span class="font-display font-black text-7xl text-brand leading-none mb-2">F</span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Uppercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+        <!-- Lowercase f -->
+        <button @click="speak('f'); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear f">
+          <span class="font-display font-black text-7xl text-brand/70 leading-none mb-2">f</span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Lowercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+      </div>
+
+      <!-- Stroke Order — Uppercase F -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData['F'] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Uppercase F</p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for uppercase F" x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stroke Order — Lowercase f -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData['f'] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Lowercase f</p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for lowercase f" x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracing F -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-4" x-data="tracingGame('F')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter F</p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+
+      <!-- Tracing f -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-6" x-data="tracingGame('f')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter f</p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+    </div><!-- /Ff section -->
+
+    <!-- ════ LETTER 3:  (optional — hidden when empty) ════ -->
+    <div class="mb-8" x-show="'' !== ''">
+      <h2 class="font-display font-bold text-xl text-slate-800 mb-4">Letter </h2>
+
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Uppercase  -->
+        <button @click="speak(''); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear ">
+          <span class="font-display font-black text-7xl text-brand leading-none mb-2"></span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Uppercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+        <!-- Lowercase  -->
+        <button @click="speak(''); $el.classList.add('ring-2','ring-brand'); setTimeout(()=>$el.classList.remove('ring-2','ring-brand'),600)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 min-h-[44px]"
+                aria-label="Hear ">
+          <span class="font-display font-black text-7xl text-brand/70 leading-none mb-2"></span>
+          <span class="text-xs font-body text-slate-400 uppercase tracking-widest">Lowercase</span>
+          <span class="text-[10px] text-brand/70 font-body mt-1">🔊 tap</span>
+        </button>
+      </div>
+
+      <!-- Stroke Order — Uppercase  -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData[''] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Uppercase </p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for uppercase " x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stroke Order — Lowercase  -->
+      <div class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4"
+           x-data="{ sd: strokeData[''] || {} }">
+        <p class="font-display font-semibold text-slate-700 text-sm mb-3">✏️ Stroke Order — Lowercase </p>
+        <div class="flex items-start gap-4">
+          <svg width="80" height="90" viewBox="0 0 80 90" class="shrink-0" aria-label="Stroke order for lowercase " x-html="sd.svg || ''"></svg>
+          <div class="flex-1 space-y-2 text-sm font-body text-slate-600">
+            <template x-for="(step, i) in (sd.steps || [])" :key="i">
+              <p class="flex items-center gap-1.5">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold shrink-0"
+                      :style="`background-color:${['#fb7185','#10b981','#f59e0b','#3b82f6'][i]}`"
+                      x-text="i+1"></span>
+                <span x-text="step"></span>
+              </p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracing  -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-4" x-data="tracingGame('')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter </p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+
+      <!-- Tracing  -->
+      <div class="rounded-card bg-brand-light border border-brand-border p-5 mb-6" x-data="tracingGame('')">
+        <div class="flex items-center justify-between mb-3">
+          <p class="font-display font-semibold text-brand-dark text-sm">🖊️ Trace the Letter </p>
+          <span x-show="done" class="text-emerald-500 font-bold text-sm bounce-in">✅ Great!</span>
+        </div>
+        <canvas x-ref="canvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="120"
+                @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+        </canvas>
+        <div class="flex gap-2 mt-3">
+          <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-body text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear tracing canvas">Clear</button>
+          <button @click="checkDone()" class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-body hover:bg-brand-dark transition-all active:scale-95" aria-label="Check tracing done">Done ✓</button>
+        </div>
+      </div>
+    </div><!-- / section -->
+
+    <button @click="markTabComplete('letter'); window.setTab('sound')" class="w-full bg-brand hover:bg-brand-dark active:scale-95 text-white font-semibold rounded-xl px-5 py-3 transition-all duration-150 shadow-sm min-h-[48px]" aria-label="Go to next tab">
+      Next: Sound &amp; Words →
+    </button>
+  </div>
+
+  <!-- ───────────────────────── TAB 2: Sound & Words ───── -->
+  <div x-show="$store.nav.tab === 'sound'"
+>
+
+    <!-- Sound Cards -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <!-- E sound card -->
+      <button @click="speak('egg'); $el.classList.add('scale-[1.04]'); setTimeout(()=>$el.classList.remove('scale-[1.04]'),300)"
+              class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center justify-center gap-2 min-h-[44px] cursor-pointer hover:shadow-lg transition-all active:scale-95"
+              aria-label="Hear: egg">
+        <span class="font-display font-black text-5xl text-brand">E</span>
+        <span class="font-display font-bold text-2xl text-brand/70">/e/</span>
+        <span class="font-body text-xs text-slate-400">egg, elephant, envelope</span>
+        <span class="text-[10px] text-brand/70 font-body">🔊 tap</span>
+      </button>
+
+      <!-- F sound card -->
+      <button @click="speak('fish'); $el.classList.add('scale-[1.04]'); setTimeout(()=>$el.classList.remove('scale-[1.04]'),300)"
+              class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center justify-center gap-2 min-h-[44px] cursor-pointer hover:shadow-lg transition-all active:scale-95"
+              aria-label="Hear: fish">
+        <span class="font-display font-black text-5xl text-brand">F</span>
+        <span class="font-display font-bold text-2xl text-brand/70">/f/</span>
+        <span class="font-body text-xs text-slate-400">fish, frog, fan</span>
+        <span class="text-[10px] text-brand/70 font-body">🔊 tap</span>
+      </button>
+
+      <!--  sound card (optional) -->
+      <button @click="speak(''); $el.classList.add('scale-[1.04]'); setTimeout(()=>$el.classList.remove('scale-[1.04]'),300)"
+              class="rounded-card bg-white border-2 border-brand-border shadow-card p-6 flex flex-col items-center justify-center gap-2 min-h-[44px] col-span-2 cursor-pointer hover:shadow-lg transition-all active:scale-95"
+              x-show="'' !== ''"
+              aria-label="Hear: ">
+        <span class="font-display font-black text-5xl text-brand"></span>
+        <span class="font-display font-bold text-2xl text-brand/70">//</span>
+        <span class="font-body text-xs text-slate-400"></span>
+        <span class="text-[10px] text-brand/70 font-body">🔊 tap</span>
+      </button>
+    </div>
+
+    <!-- Words -->
+    <h2 class="font-display font-bold text-xl text-slate-800 mb-4">Words</h2>
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <template x-for="item in allWords" :key="item.word">
+        <button @click="speak(item.word); $el.classList.add('scale-[1.04]'); setTimeout(()=>$el.classList.remove('scale-[1.04]'),300)"
+                class="rounded-card bg-white border-2 border-brand-border shadow-card p-4 flex flex-col items-center justify-center gap-1 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 active:scale-95 min-h-[44px]"
+                :aria-label="item.word">
+          <span class="text-5xl" aria-hidden="true" x-text="item.emoji"></span>
+          <span class="font-game font-bold text-base text-slate-700" x-text="item.word"></span>
+          <span class="text-[10px] text-brand/70 font-body">🔊 tap</span>
+        </button>
+      </template>
+    </div>
+
+    <!-- Sight Words — 강의안의 'Sight Words:' 라인 매핑. 개수에 맞춰 sightWords 배열 항목 추가/삭제 -->
+    <div class="bg-amber-50 border border-amber-200 rounded-card p-4 mb-5">
+      <p class="text-xs font-body font-bold text-amber-600 uppercase tracking-widest mb-3">👁 Sight Words</p>
+      <div class="flex gap-3" x-data="{ sightWords: ['and', 'in', ''].filter(w => w !== '') }">
+        <template x-for="w in sightWords" :key="w">
+          <button @click="speak(w); $el.classList.add('scale-[1.04]'); setTimeout(()=>$el.classList.remove('scale-[1.04]'),300)"
+                  class="flex-1 bg-white border border-amber-200 rounded-xl px-4 py-3 font-display font-bold text-base text-amber-800 hover:bg-amber-50 transition-all active:scale-95 min-h-[44px]"
+                  :aria-label="'Hear: ' + w">
+            <span x-text="w"></span>
+            <span class="block text-[10px] text-amber-400 font-body font-normal mt-0.5">🔊 tap</span>
+          </button>
+        </template>
+      </div>
+    </div>
+
+
+    <button @click="markTabComplete('sound'); window.setTab('song')" class="w-full bg-brand hover:bg-brand-dark active:scale-95 text-white font-semibold rounded-xl px-5 py-3 transition-all duration-150 shadow-sm min-h-[48px]" aria-label="Go to next tab">
+      Next: Song →
+    </button>
+  </div>
+
+  <!-- ───────────────────────── TAB 5: Song & Move ───── -->
+  <div x-show="$store.nav.tab === 'song'"
+>
+
+    <p class="text-base md:text-xl font-bold text-brand text-center mb-4">🎵 Old MacDonald Had a Farm (Super Simple Songs)</p>
+
+    <div class="aspect-video rounded-card overflow-hidden shadow-md mb-5 bg-slate-100">
+      <iframe data-video-id="pre_ch03_song"
+              src="https://www.youtube.com/embed/5oYKonYBujg"
+              class="w-full h-full" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"
+              title="Song — pre_ch03_song">
+      </iframe>
+    </div>
+
+    <div class="mb-6 rounded-2xl bg-brand-light border-2 border-brand-border p-5 text-center">
+      <p class="text-sm font-bold text-brand mb-3 uppercase tracking-wide">📝 Lyrics</p>
+      <p class="text-base md:text-xl md:font-bold leading-loose text-slate-700 whitespace-pre-wrap" style="font-family: Quicksand, sans-serif;">Old MacDonald had a farm, E-I-E-I-O.
+And on his farm he had a cow, E-I-E-I-O.
+With a moo-moo here, and a moo-moo there.
+Here a moo, there a moo, everywhere a moo-moo.
+Old MacDonald had a farm, E-I-E-I-O.
+
+(Continue with: pig/oink, duck/quack, horse/neigh, sheep/baa, dog/woof, cat/meow)</p>
+    </div>
+
+
+    <button @click="markTabComplete('song'); window.setTab('speaking')" class="w-full bg-brand hover:bg-brand-dark active:scale-95 text-white font-semibold rounded-xl px-5 py-3 transition-all duration-150 shadow-sm min-h-[48px]" aria-label="Go to next tab">
+      Next: Speaking →
+    </button>
+  </div>
+
+  <!-- ───────────────────────── TAB 4: Speaking ───── -->
+  <div x-show="$store.nav.tab === 'speaking'" x-data="{ spTab: 'echo' }">
+
+    <h2 class="font-display font-bold text-xl text-slate-800 mb-1">🗣️ Speaking Practice</h2>
+    <p class="font-body text-sm text-slate-500 mb-4">Listen, repeat, and practice!</p>
+
+    <!-- Speed Control -->
+    <div class="flex items-center gap-2 mb-4" x-data="{ speed: 'normal' }">
+      <span class="text-xs text-slate-400 font-body">Speed:</span>
+      <button @click="speed='slow'; speechRate=0.6"
+              :class="speed==='slow' ? 'bg-brand text-white border-brand font-medium' : 'border-slate-200 text-slate-600 hover:border-brand hover:text-brand'"
+              class="text-xs px-3 py-1 rounded-full border transition-all" aria-label="Slow speed">🐢 Slow</button>
+      <button @click="speed='normal'; speechRate=0.85"
+              :class="speed==='normal' ? 'bg-brand text-white border-brand font-medium' : 'border-slate-200 text-slate-600 hover:border-brand hover:text-brand'"
+              class="text-xs px-3 py-1 rounded-full border transition-all" aria-label="Normal speed">Normal</button>
+      <button @click="speed='fast'; speechRate=1.1"
+              :class="speed==='fast' ? 'bg-brand text-white border-brand font-medium' : 'border-slate-200 text-slate-600 hover:border-brand hover:text-brand'"
+              class="text-xs px-3 py-1 rounded-full border transition-all" aria-label="Fast speed">🐇 Fast</button>
+    </div>
+
+    <!-- Speaking sub-tab pills -->
+    <div class="flex gap-2 mb-5">
+      <button @click="spTab='echo'"
+              :class="spTab==='echo' ? 'bg-brand text-white shadow-sm font-semibold' : 'border border-slate-200 text-slate-500 hover:border-brand hover:text-brand'"
+              class="flex-1 text-sm px-3 py-2 rounded-full transition-all font-body" aria-label="Listen and Point tab">👂 Point</button>
+      <button @click="spTab='read'"
+              :class="spTab==='read' ? 'bg-brand text-white shadow-sm font-semibold' : 'border border-slate-200 text-slate-500 hover:border-brand hover:text-brand'"
+              class="flex-1 text-sm px-3 py-2 rounded-full transition-all font-body" aria-label="Read-Aloud tab">📢 Read</button>
+      <button @click="spTab='qa'"
+              :class="spTab==='qa' ? 'bg-brand text-white shadow-sm font-semibold' : 'border border-slate-200 text-slate-500 hover:border-brand hover:text-brand'"
+              class="flex-1 text-sm px-3 py-2 rounded-full transition-all font-body" aria-label="Q&A Pattern tab">💬 Q&amp;A</button>
+    </div>
+
+    <!-- ── Listen & Point panel ── -->
+    <div x-show="spTab==='echo'"
+         x-data="{
+           items: [
+             { word: 'egg', emoji: '🥚' },
+             { word: 'elephant', emoji: '🐘' },
+             { word: 'envelope', emoji: '✉️' },
+             { word: 'fish', emoji: '🐟' },
+             { word: 'frog', emoji: '🐸' },
+             { word: 'fan', emoji: '🌬️' },
+             { word: '', emoji: '' },
+             { word: '', emoji: '' },
+             { word: '', emoji: '' },
+           ].filter(item => item.word !== ''),
+           target: null,
+           answered: null,
+           wrongIdx: null,
+           done: 0,
+           used: [],
+           get allDone() { return this.done >= this.items.length; },
+           playRandom() {
+             if (this.answered !== null) {
+               this.done++;
+               if (this.done >= this.items.length) { this.target = null; this.answered = null; return; }
+             }
+             if (this.used.length >= this.items.length) this.used = [];
+             let idx;
+             do { idx = Math.floor(Math.random() * this.items.length); } while (this.used.includes(idx));
+             this.used.push(idx);
+             this.target = idx;
+             this.answered = null;
+             speak(this.items[idx].word);
+           },
+           tap(i) {
+             if (this.target === null || this.answered !== null || this.wrongIdx !== null) return;
+             if (i === this.target) {
+               this.answered = i;
+             } else {
+               this.wrongIdx = i;
+               setTimeout(() => { this.wrongIdx = null; }, 700);
+             }
+           },
+           reset() { this.target = null; this.answered = null; this.done = 0; this.used = []; this.wrongIdx = null; }
+         }"
+         class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-lg" aria-hidden="true">👂</span>
+        <h3 class="font-display font-semibold text-slate-800">Listen &amp; Point</h3>
+        <span class="text-xs text-slate-400 ml-auto">Step 1 · Recognize</span>
+        <button x-show="target !== null && !allDone" @click="reset()"
+                class="ml-2 text-[10px] font-body text-slate-400 hover:text-brand border border-slate-200 rounded px-1.5 py-0.5 transition-all"
+                aria-label="Reset">↺ Reset</button>
+      </div>
+      <p class="text-xs text-slate-400 font-body mb-3">Listen and tap the right picture!</p>
+
+      <!-- 완료 화면 -->
+      <div x-show="allDone" class="text-center py-6">
+        <p class="text-4xl mb-2">🎉</p>
+        <p class="font-display font-bold text-slate-800 mb-1">Great job!</p>
+        <p class="text-sm text-slate-400 font-body mb-3" x-text="'All ' + items.length + ' words done!'"></p>
+        <button @click="reset()" class="bg-brand text-white font-display font-semibold px-6 py-2 rounded-xl hover:bg-brand-dark active:scale-95 transition-all">Play Again</button>
+      </div>
+
+      <!-- 진행 화면 -->
+      <template x-if="!allDone">
+        <div>
+          <!-- 진행 도트 -->
+          <div x-show="target !== null" class="flex gap-1.5 justify-center mb-3">
+            <template x-for="(item, i) in items" :key="i">
+              <span class="w-3 h-3 rounded-full transition-all duration-300"
+                    :class="i < done ? 'bg-brand' : 'bg-slate-200'"></span>
+            </template>
+            <span class="ml-2 text-xs font-display text-slate-400" x-text="done + ' / ' + items.length"></span>
+          </div>
+          <!-- Play / Next / Listen again button -->
+          <button @click="(target !== null && answered === null) ? speak(items[target].word) : playRandom()"
+                  class="w-full rounded-xl py-3 mb-3 font-display font-semibold flex items-center justify-center gap-2 transition-all active:scale-95 border-2"
+                  :class="target === null || answered === null ? 'bg-brand text-white border-brand hover:bg-brand-dark' : 'bg-brand-light text-brand-dark border-brand hover:bg-brand hover:text-white'"
+                  aria-label="Play a word">
+            <span>🔊</span>
+            <span x-text="target === null ? 'Listen!' : (answered === null ? 'Listen again' : 'Next word →')"></span>
+          </button>
+          <!-- Cards grid -->
+          <div class="grid grid-cols-3 gap-1">
+            <template x-for="(item, i) in items" :key="i">
+              <button @click="tap(i)"
+                      class="rounded-card bg-white border-2 shadow-card py-4 px-2 flex flex-col items-center justify-center gap-1 transition-all duration-200 text-center"
+                      :class="target === null
+                        ? 'border-brand-border opacity-40 cursor-default'
+                        : answered !== null && i === target
+                          ? 'border-emerald-400 bg-emerald-50 cursor-default'
+                          : answered !== null && i !== target
+                            ? 'border-brand-border opacity-40 cursor-default'
+                            : wrongIdx === i
+                              ? 'border-red-400 bg-red-50 scale-95 cursor-default'
+                              : 'border-brand-border hover:shadow-lg hover:-translate-y-0.5 active:scale-95 cursor-pointer'"
+                      :aria-label="item.word">
+                <span class="text-[3.9rem]" aria-hidden="true" x-text="item.emoji"></span>
+                <p class="font-game font-bold text-base transition-all"
+                   :class="answered !== null ? 'text-slate-700' : 'text-slate-300'"
+                   x-text="answered !== null ? item.word : (i + 1)"></p>
+                <p class="text-[10px] font-body text-brand/70" x-show="target !== null && answered === null && wrongIdx === null">tap!</p>
+              </button>
+            </template>
+          </div>
+          <!-- Feedback -->
+          <div class="mt-3 h-7 flex items-center justify-center">
+            <span x-show="answered !== null" class="text-emerald-600 font-display font-semibold text-sm">✓ Correct!</span>
+            <span x-show="wrongIdx !== null" class="text-red-500 font-display font-semibold text-sm">Try again! 👂</span>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- ── Read-Aloud panel ── -->
+    <div x-show="spTab==='read'"
+         x-data="{
+           raItems: [
+             'an egg / an elephant / in the egg', 'a fish / a frog / a fish and a frog',
+             'I see an egg and a fish.', 'The elephant and the frog.',
+           ].filter(s => s !== '')
+         }"
+         class="rounded-card bg-white border-2 border-brand-border shadow-card p-5 mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-lg" aria-hidden="true">📢</span>
+        <h3 class="font-display font-semibold text-slate-800">Read-Aloud</h3>
+        <span class="text-xs text-slate-400 ml-auto">Step 2 · Chunk</span>
+      </div>
+      <p class="text-xs text-slate-400 font-body mb-4">Point to each word and say it. Students repeat after you.</p>
+      <div class="space-y-3">
+        <template x-for="(s, i) in raItems" :key="i">
+          <div @click="speakWithPauses(s)"
+               class="px-4 py-4 rounded-xl bg-brand-light border border-brand-border cursor-pointer hover:bg-brand-light transition-all active:scale-[0.98]"
+               role="button" :aria-label="'Hear sentence ' + (i+1)">
+            <p class="font-body text-base font-semibold text-brand-dark" x-text="'&quot;' + s + '&quot;'"></p>
+            <p class="text-xs text-brand/70 font-body mt-1">🔊 Click to hear</p>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- ── Q&A Pattern panel ── -->
+    <div x-show="spTab==='qa'"
+         x-data="{
+           qaItems: [
+             { emoji: '🥚', question: 'What\'s this?', answer: 'It\'s an egg.' },
+             { emoji: '🐘', question: 'What\'s this?', answer: 'It\'s an elephant.' },
+             { emoji: '🐟', question: 'What\'s this?', answer: 'It\'s a fish.' },
+             { emoji: '🐸', question: 'What\'s this?', answer: 'It\'s a frog.' },
+           ].filter(item => item.emoji !== ''),
+           qaReveal: [false, false, false, false]
+         }"
+         class="rounded-card bg-white border-2 border-brand shadow-card p-5 mb-4">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-lg" aria-hidden="true">💬</span>
+        <h3 class="font-display font-semibold text-slate-800">Q&amp;A Pattern</h3>
+        <span class="text-xs text-brand-dark ml-auto font-medium">Step 3 · Produce</span>
+      </div>
+      <p class="text-xs text-slate-400 font-body mb-3">Tap the picture to reveal the answer.</p>
+      <!-- Pattern banner -->
+      <div class="bg-slate-50 rounded-xl px-4 py-2 mb-4 text-center">
+        <p class="text-[10px] text-slate-400 font-body uppercase tracking-wide mb-0.5">Today's Pattern</p>
+        <p class="font-display font-bold text-slate-700 text-sm">What's this? → It's a / an ___.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <template x-for="(item, i) in qaItems" :key="i">
+          <div @click="qaReveal[i] = !qaReveal[i]; if (qaReveal[i]) speak(item.answer)"
+               class="flex flex-col rounded-xl border-2 overflow-hidden bg-white cursor-pointer transition-all"
+               :class="qaReveal[i] ? 'border-brand' : 'border-slate-200 hover:border-brand'"
+               role="button" :aria-label="item.question">
+            <!-- emoji area -->
+            <div class="h-40 flex items-center justify-center bg-slate-50">
+              <span class="text-[5.85rem]" aria-hidden="true" x-text="item.emoji"></span>
+            </div>
+            <!-- Q&A text -->
+            <div class="px-2 pt-1 pb-1 border-t border-slate-100 shrink-0">
+              <button @click.stop="speak(item.question)"
+                      class="w-full text-left hover:bg-slate-50 rounded px-1 py-0.5 transition"
+                      :aria-label="'Teacher: ' + item.question">
+                <span class="text-[10px] font-bold text-slate-400 mr-0.5">T:</span>
+                <span class="text-xs font-body text-slate-700 leading-tight" x-text="item.question"></span>
+              </button>
+              <div class="min-h-[1.1rem]">
+                <template x-if="qaReveal[i]">
+                  <button @click.stop="speak(item.answer)"
+                          class="w-full text-left hover:bg-emerald-50 rounded px-1 py-0.5 transition"
+                          :aria-label="'Student: ' + item.answer">
+                    <span class="text-[10px] font-bold text-emerald-500 mr-0.5">S:</span>
+                    <span class="text-xs font-body text-emerald-800 italic font-semibold leading-tight" x-text="item.answer"></span>
+                  </button>
+                </template>
+                <template x-if="!qaReveal[i]">
+                  <p class="text-[10px] text-slate-300 font-body italic px-1">Tap to reveal →</p>
+                </template>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Next button — Q&A 탭에서만 표시 -->
+    <button x-show="spTab==='qa'"
+            @click="markTabComplete('speaking'); window.setTab('activities')"
+            class="w-full bg-brand hover:bg-brand-dark active:scale-95 text-white font-semibold rounded-xl px-5 py-3 transition-all duration-150 shadow-sm min-h-[48px]"
+            aria-label="Go to next tab">
+      Next: Activities →
+    </button>
+  </div>
+
+
+  <!-- ───────────────────────── TAB 5: Activities ───── -->
+  <div x-show="$store.nav.tab === 'activities'"
+>
+
+    <!-- Game picker pills -->
+    <div class="flex gap-2 overflow-x-auto pb-2 mb-6" style="scrollbar-width: none; -ms-overflow-style: none;">
+      <template x-for="g in games" :key="g.id">
+        <button @click="activeGame = g.id"
+                :class="activeGame === g.id ? 'bg-brand text-white shadow-sm' : 'text-slate-500 hover:bg-brand-light border border-slate-200'"
+                class="px-4 py-2 rounded-full text-sm font-game font-semibold whitespace-nowrap transition-all duration-200 min-h-[36px]"
+                :aria-label="g.label + ' game'">
+          <span x-text="g.label"></span>
+        </button>
+      </template>
+    </div>
+
+    <!-- ── Tracing Game ── -->
+    <div x-show="activeGame === 'tracing'" x-data="tracingActivity()">
+      <div x-show="!started" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">✏️</div>
+        <h3 class="font-game font-bold text-lg text-slate-800 mb-2">Tracing Game</h3>
+        <p class="font-game text-sm text-slate-500 mb-6">Trace the letters in E and F!</p>
+        <button @click="startTracing()" class="bg-brand text-white font-game font-semibold px-8 py-3 rounded-xl hover:bg-brand-dark active:scale-95 transition-all min-h-[48px]" aria-label="Start Tracing Game">Start Game</button>
+      </div>
+
+      <div x-show="started && !allDone">
+        <p class="font-game text-sm text-slate-500 mb-3">
+          Letter <span class="font-bold text-brand" x-text="traceLetters[currentIdx]"></span>
+          (<span x-text="currentIdx+1"></span> / <span x-text="traceLetters.length"></span>)
+        </p>
+        <div class="rounded-card bg-brand-light border border-brand-border p-4 mb-4">
+          <canvas x-ref="tracingCanvas" class="w-full rounded-xl bg-white border border-brand-border cursor-crosshair" height="160"
+                  @mousedown="startDraw($event)" @mousemove="draw($event)" @mouseup="endDraw()"
+                  @touchstart.prevent="startDraw($event)" @touchmove.prevent="draw($event)" @touchend="endDraw()">
+          </canvas>
+          <div class="flex gap-2 mt-3">
+            <button @click="clearCanvas()" class="px-3 py-1.5 bg-white border border-brand-border rounded-lg text-xs font-game text-brand hover:bg-brand-light transition-all active:scale-95" aria-label="Clear">Clear</button>
+            <button @click="nextLetter()" class="flex-1 px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-game font-semibold hover:bg-brand-dark transition-all active:scale-95" aria-label="Next letter">
+              <span x-text="currentIdx < traceLetters.length-1 ? 'Next Letter →' : 'Finish ✓'"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div x-show="allDone" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">🎉</div>
+        <h3 class="font-game font-bold text-xl text-slate-800 mb-1">Well Done!</h3>
+        <p class="font-game text-slate-500 mb-4">You traced all 4 letters!</p>
+        <button @click="resetTracing()" class="mt-2 bg-white border border-slate-200 text-slate-700 font-game font-medium px-6 py-2.5 rounded-xl hover:bg-slate-50 active:scale-95 transition-all" aria-label="Play Again">Play Again</button>
+      </div>
+    </div>
+
+    <!-- ── Memory Game ── -->
+    <div x-show="activeGame === 'memory'" x-data="memoryGame()">
+      <div x-show="!started" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">🧠</div>
+        <h3 class="font-game font-bold text-lg text-slate-800 mb-2">Memory Game</h3>
+        <p class="font-game text-sm text-slate-500 mb-6">Match the letter with the picture!</p>
+        <button @click="startGame()" class="bg-brand text-white font-game font-semibold px-8 py-3 rounded-xl hover:bg-brand-dark active:scale-95 transition-all min-h-[48px]" aria-label="Start Memory Game">Start Game</button>
+      </div>
+
+      <div x-show="started && !gameComplete">
+        <div class="flex justify-between items-center mb-3">
+          <p class="font-game text-sm text-slate-500">Moves: <span class="font-bold text-brand" x-text="moves"></span></p>
+          <p class="font-game text-sm text-slate-500">Matched: <span class="font-bold text-emerald-600" x-text="matched"></span>/<span x-text="totalPairs"></span></p>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <template x-for="(card, i) in board" :key="i">
+            <button @click="flipCard(i)"
+                    :disabled="card.matched || card.flipped || flipping"
+                    :class="card.matched
+                      ? 'ring-2 ring-emerald-400 bg-emerald-100'
+                      : (card.flipped ? 'bg-white border border-slate-200' : 'bg-brand hover:bg-brand-dark')"
+                    class="aspect-square rounded-card flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95 overflow-hidden relative"
+                    :aria-label="card.flipped || card.matched ? card.word : 'Hidden card ' + (i+1)">
+
+              <span x-show="!card.flipped && !card.matched"
+                    class="font-game font-bold text-xl text-white"
+                    x-text="i+1"></span>
+
+              <!-- Letter card -->
+              <div x-show="(card.flipped || card.matched) && card.isLetter"
+                   class="w-full h-full flex flex-col items-center justify-center p-1">
+                <span class="font-display font-black text-5xl text-brand leading-none" x-text="card.display"></span>
+                <span class="font-game font-bold text-base text-slate-500 mt-1" x-text="card.word"></span>
+              </div>
+
+              <!-- Image card (imgUrl) -->
+              <template x-if="(card.flipped || card.matched) && !card.isLetter && card.imgUrl">
+                <div class="absolute inset-0">
+                  <img :src="card.imgUrl" :alt="card.word" :data-img-id="card.id"
+                       class="w-full h-full object-cover">
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-2 py-1.5">
+                    <p class="font-game font-bold text-base text-white text-center" x-text="card.word"></p>
+                  </div>
+                </div>
+              </template>
+
+              <!-- Emoji card (no imgUrl) -->
+              <div x-show="(card.flipped || card.matched) && !card.isLetter && !card.imgUrl"
+                   class="w-full h-full flex flex-col items-center justify-center gap-1 p-1"
+                   :data-img-id="card.id">
+                <span class="text-[3.9rem] leading-none" aria-hidden="true" x-text="card.emoji"></span>
+                <span class="font-game font-bold text-xl text-slate-600" x-text="card.word"></span>
+              </div>
+
+            </button>
+          </template>
+        </div>
+      </div>
+
+      <div x-show="gameComplete" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">🎉</div>
+        <h3 class="font-game font-bold text-xl text-slate-800 mb-1">Well Done!</h3>
+        <p class="font-game text-slate-500 mb-2">Completed in <span class="font-semibold text-brand" x-text="moves"></span> moves!</p>
+        <button @click="resetGame()" class="mt-4 bg-white border border-slate-200 text-slate-700 font-game font-medium px-6 py-2.5 rounded-xl hover:bg-slate-50 active:scale-95 transition-all" aria-label="Play Again">Play Again</button>
+      </div>
+    </div>
+
+    <!-- ── Picture Match ── -->
+    <div x-show="activeGame === 'picture'" x-data="pictureMatch()">
+
+      <div x-show="!started" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">🖼️</div>
+        <h3 class="font-game font-bold text-lg text-slate-800 mb-2">Picture Match</h3>
+        <p class="font-game text-sm text-slate-500 mb-6">Match the word to the picture!</p>
+        <button @click="startGame()" class="bg-brand text-white font-game font-semibold px-8 py-3 rounded-xl hover:bg-brand-dark active:scale-95 transition-all min-h-[48px]" aria-label="Start Picture Match">Start Game</button>
+      </div>
+
+      <div x-show="started && !gameComplete">
+        <div class="flex items-center justify-between mb-4">
+          <p class="font-game text-sm text-slate-500 text-center">Tap the picture that matches the word!</p>
+          <button @click="resetGame()" class="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-game text-slate-500 hover:bg-slate-50 active:scale-95 transition-all" aria-label="Reset game">↺ Reset</button>
+        </div>
+        <div class="text-center mb-5">
+          <div class="inline-block bg-brand text-white font-game font-bold text-3xl px-10 py-4 rounded-card tracking-wide" x-text="currentWord.word"></div>
+        </div>
+        <div class="grid grid-cols-3 gap-3 mb-4">
+          <template x-for="(item, i) in shuffledPics" :key="i">
+            <button @click="checkMatch(item)"
+                    :disabled="correctPick === item.word"
+                    :class="correctPick === item.word
+                              ? 'ring-2 ring-emerald-400 bg-emerald-50 scale-105'
+                              : wrongPick === item.word
+                                ? 'ring-2 ring-red-400 bg-red-50 shake'
+                                : 'bg-white border-2 border-brand-border shadow-card hover:shadow-md hover:-translate-y-0.5'"
+                    class="rounded-card py-5 px-2 flex flex-col items-center justify-center gap-3 transition-all duration-200 active:scale-95 cursor-pointer relative"
+                    :aria-label="item.word">
+              <span class="text-[3.9rem] leading-none" aria-hidden="true" x-text="item.emoji"></span>
+              <span class="font-game font-bold text-base text-slate-500" x-text="i+1"></span>
+            </button>
+          </template>
+        </div>
+        <div x-show="correctPick" class="text-center mt-2">
+          <button @click="nextWord()" class="bg-brand text-white font-game font-semibold px-8 py-2.5 rounded-xl hover:bg-brand-dark active:scale-95 transition-all">
+            Next →
+          </button>
+        </div>
+      </div>
+
+      <div x-show="gameComplete" class="text-center py-12">
+        <div class="text-5xl mb-4" aria-hidden="true">🎉</div>
+        <h3 class="font-game font-bold text-xl text-slate-800 mb-1">Well Done!</h3>
+        <p class="font-game text-slate-500 mb-2">All pictures matched!</p>
+        <button @click="resetGame()" class="mt-4 bg-white border border-slate-200 text-slate-700 font-game font-medium px-6 py-2.5 rounded-xl hover:bg-slate-50 active:scale-95 transition-all" aria-label="Play Again">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Mark complete -->
+    <div class="mt-8">
+      <button @click="markTabComplete('activities'); fireConfetti()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold rounded-xl px-5 py-3 transition-all duration-150 shadow-sm min-h-[44px]" aria-label="Finish lesson">
+        🎉 Lesson Complete!
+      </button>
+    </div>
+  </div>
+
+</div><!-- /tab contents -->
+
+<!-- Speech note for non-Chrome -->
+<div class="max-w-2xl mx-auto px-4 mb-4">
+  <p class="speech-note hidden text-xs text-amber-600 bg-amber-50 px-3 py-2 rounded-lg font-body">
+    🎙️ Pronunciation works best in Chrome. Some features may be limited in this browser.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+<footer class="w-full bg-slate-900 text-white mt-16">
+  <div class="max-w-4xl mx-auto px-6 py-10">
+    <div class="flex items-center gap-4 mb-6">
+      <svg width="48" height="48" viewBox="0 0 80 80" aria-hidden="true">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="#fb7185" stroke-width="3"/>
+        <circle cx="40" cy="40" r="32" fill="#fb7185"/>
+        <path d="M22,40 Q31,32 40,40 Q49,32 58,40 L58,52 Q49,44 40,52 Q31,44 22,52 Z" fill="white" opacity="0.92"/>
+        <line x1="40" y1="40" x2="40" y2="52" stroke="#fb7185" stroke-width="2"/>
+        <circle cx="40" cy="24" r="3.5" fill="#f59e0b"/>
+        <circle cx="30" cy="27" r="2" fill="#f59e0b" opacity="0.6"/>
+        <circle cx="50" cy="27" r="2" fill="#f59e0b" opacity="0.6"/>
+      </svg>
+      <div>
+        <p class="font-display font-bold text-lg tracking-wide">OHANA ENGLISH</p>
+        <p class="text-sm text-slate-400 font-body tracking-widest">EDITSTUDY.COM</p>
+      </div>
+    </div>
+    <div class="border-t border-slate-700/60 mb-6"></div>
+    <div class="grid grid-cols-2 gap-x-8 gap-y-2 mb-6 text-xs text-slate-400 font-body">
+      <span>✦ Developed with the assistance of Claude AI</span>
+      <span>✦ CEFR International Language Standards</span>
+      <span>✦ WIDA-informed Instructional Design</span>
+      <span>✦ Sponsored by CAMA</span>
+    </div>
+    <div class="border-t border-slate-700/60 mb-4"></div>
+    <p class="text-xs text-slate-500 text-center font-body">© <span id="footer-year"></span> Ohana English. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════ SCRIPTS ═══ -->
+<script>
+  // ── Speech ──
+  let speechRate = 0.85;
+  function speak(text) {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = speechRate;
+    speechSynthesis.speak(utterance);
+  }
+
+  // ── Confetti ──
+  function fireConfetti() {
+    if (window.confetti) {
+      confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 }, colors: ['#fb7185', '#10b981', '#f59e0b'] });
+    }
+  }
+
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ── Stroke Order Data ──
+  const _sc = ['#fb7185','#10b981','#f59e0b','#3b82f6'];
+  function _bd(x, y, n) {
+    return `<circle cx="${x}" cy="${y}" r="6" fill="${_sc[n-1]}"/><text x="${x-3}" y="${y+3}" font-size="7" fill="white" font-weight="bold">${n}</text>`;
+  }
+  const strokeData = {
+    'A': { svg: `<path d="M10,80 L40,10 L70,80 M20,55 L60,55" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10,80 L40,10" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(10,80,1)}<path d="M40,10 L70,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(40,10,2)}<path d="M20,55 L60,55" stroke="#f59e0b" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,55,3)}`, steps: ['Diagonal down-right','Diagonal down-left','Crossbar in the middle'] },
+    'B': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,10 Q55,10 55,28 Q55,45 15,45" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M15,45 Q60,45 60,62 Q60,80 15,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<path d="M15,10 Q55,10 55,28 Q55,45 15,45" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,10,2)}<path d="M15,45 Q60,45 60,62 Q60,80 15,80" stroke="#f59e0b" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,45,3)}`, steps: ['Straight line down','Upper bump (smaller)','Lower bump (bigger)'] },
+    'C': { svg: `<path d="M65,22 A30,34 0 1,0 65,68" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M65,22 A30,34 0 1,0 65,68" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(65,22,1)}`, steps: ['Curve from top around to the left'] },
+    'D': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,10 Q70,10 70,45 Q70,80 15,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<path d="M15,10 Q70,10 70,45 Q70,80 15,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,10,2)}`, steps: ['Straight line down','Large bump to the right'] },
+    'E': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="65" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="45" x2="55" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="80" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="15" y1="10" x2="65" y2="10" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,2)}<line x1="15" y1="45" x2="55" y2="45" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,45,3)}<line x1="15" y1="80" x2="65" y2="80" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,80,4)}`, steps: ['Straight line down','Top bar right','Middle bar (shorter)','Bottom bar right'] },
+    'F': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="65" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="45" x2="55" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="15" y1="10" x2="65" y2="10" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,2)}<line x1="15" y1="45" x2="55" y2="45" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,45,3)}`, steps: ['Straight line down','Top bar right','Middle bar (shorter)'] },
+    'G': { svg: `<path d="M65,22 A30,34 0 1,0 65,68" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="65" y1="45" x2="38" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M65,22 A30,34 0 1,0 65,68" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(65,22,1)}<line x1="65" y1="45" x2="38" y2="45" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,45,2)}`, steps: ['Curve from top around left','Short bar inward at middle'] },
+    'H': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="45" x2="65" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="65" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}<line x1="15" y1="45" x2="65" y2="45" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,45,3)}`, steps: ['Left line down','Right line down','Crossbar in the middle'] },
+    'I': { svg: `<line x1="40" y1="10" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="10" x2="60" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="80" x2="60" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="10" x2="60" y2="10" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,1)}<line x1="40" y1="10" x2="40" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,14,2)}<line x1="20" y1="80" x2="60" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,80,3)}`, steps: ['Top horizontal bar','Straight line down','Bottom horizontal bar'] },
+    'J': { svg: `<line x1="30" y1="10" x2="60" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M50,10 L50,65 Q50,82 35,82 Q20,82 20,68" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="30" y1="10" x2="60" y2="10" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(30,10,1)}<path d="M50,10 L50,65 Q50,82 35,82 Q20,82 20,68" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(50,14,2)}`, steps: ['Short top bar','Down and hook left at bottom'] },
+    'K': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="15" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="45" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="15" y2="45" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}<line x1="15" y1="45" x2="65" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,45,3)}`, steps: ['Straight line down','Diagonal to middle','Diagonal to bottom-right'] },
+    'L': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="80" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="15" y1="80" x2="65" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,80,2)}`, steps: ['Straight line down','Line to the right at bottom'] },
+    'M': { svg: `<line x1="10" y1="10" x2="10" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="10" x2="40" y2="55" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="55" x2="70" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="70" y1="10" x2="70" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="10" x2="10" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(10,10,1)}<line x1="10" y1="10" x2="40" y2="55" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,2)}<line x1="40" y1="55" x2="70" y2="10" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,55,3)}<line x1="70" y1="10" x2="70" y2="80" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round"/>${_bd(70,10,4)}`, steps: ['Left line down','Diagonal down to center','Diagonal up to right','Right line down'] },
+    'N': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="15" y1="10" x2="65" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,2)}<line x1="65" y1="10" x2="65" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,3)}`, steps: ['Left line down','Diagonal','Right line down'] },
+    'O': { svg: `<ellipse cx="40" cy="45" rx="27" ry="35" stroke="#e2e8f0" stroke-width="6" fill="none"/><path d="M40,10 C67,10 67,80 40,80 C13,80 13,10 40,10" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(40,10,1)}`, steps: ['Full oval, clockwise from top'] },
+    'P': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,10 Q60,10 60,28 Q60,45 15,45" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<path d="M15,10 Q60,10 60,28 Q60,45 15,45" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,10,2)}`, steps: ['Straight line down','Upper bump to the right'] },
+    'Q': { svg: `<ellipse cx="40" cy="45" rx="27" ry="35" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="52" y1="67" x2="68" y2="82" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M40,10 C67,10 67,80 40,80 C13,80 13,10 40,10" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(40,10,1)}<line x1="52" y1="67" x2="68" y2="82" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(52,67,2)}`, steps: ['Full oval, clockwise from top','Short tail at bottom-right'] },
+    'R': { svg: `<line x1="15" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,10 Q60,10 60,28 Q60,45 15,45" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="45" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<path d="M15,10 Q60,10 60,28 Q60,45 15,45" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,10,2)}<line x1="15" y1="45" x2="65" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,45,3)}`, steps: ['Straight line down','Upper bump','Diagonal leg to bottom-right'] },
+    'S': { svg: `<path d="M62,25 Q62,10 40,10 Q18,10 18,28 Q18,45 40,45 Q62,45 62,62 Q62,80 40,80 Q18,80 18,65" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M62,25 Q62,10 40,10 Q18,10 18,28 Q18,45 40,45 Q62,45 62,62 Q62,80 40,80 Q18,80 18,65" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(62,25,1)}`, steps: ['S-curve from top to bottom'] },
+    'T': { svg: `<line x1="10" y1="10" x2="70" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="10" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="10" x2="70" y2="10" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(10,10,1)}<line x1="40" y1="10" x2="40" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,14,2)}`, steps: ['Top bar across','Vertical line down the center'] },
+    'U': { svg: `<path d="M15,10 L15,65 Q15,82 40,82 Q65,82 65,65 L65,10" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M15,10 L15,65 Q15,82 40,82 Q65,82 65,65" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="65" x2="65" y2="10" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,65,2)}`, steps: ['Down and curve at bottom','Up on the right'] },
+    'V': { svg: `<line x1="15" y1="10" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="40" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="40" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}`, steps: ['Diagonal down-left','Diagonal down-right'] },
+    'W': { svg: `<line x1="10" y1="10" x2="25" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="25" y1="80" x2="40" y2="35" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="35" x2="55" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="55" y1="80" x2="70" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="10" x2="25" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(10,10,1)}<line x1="25" y1="80" x2="40" y2="35" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(25,80,2)}<line x1="40" y1="35" x2="55" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,35,3)}<line x1="55" y1="80" x2="70" y2="10" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round"/>${_bd(55,80,4)}`, steps: ['Diagonal down','Up to center','Diagonal down','Up to finish'] },
+    'X': { svg: `<line x1="15" y1="10" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="65" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="15" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}`, steps: ['Diagonal down-right','Diagonal down-left'] },
+    'Y': { svg: `<line x1="15" y1="10" x2="40" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="40" y2="45" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="45" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="40" y2="45" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="40" y2="45" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}<line x1="40" y1="45" x2="40" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,45,3)}`, steps: ['Diagonal from top-left','Diagonal from top-right','Straight down from center'] },
+    'Z': { svg: `<line x1="15" y1="10" x2="65" y2="10" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="10" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="80" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="10" x2="65" y2="10" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,10,1)}<line x1="65" y1="10" x2="15" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,10,2)}<line x1="15" y1="80" x2="65" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,80,3)}`, steps: ['Top line right','Diagonal down-left','Bottom line right'] },
+    'a': { svg: `<circle cx="38" cy="52" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="60" y1="30" x2="60" y2="74" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M60,32 A22,22 0 1,0 60,72" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(60,32,1)}<line x1="60" y1="30" x2="60" y2="74" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(63,30,2)}`, steps: ['Circle counter-clockwise','Stroke down on the right'] },
+    'b': { svg: `<line x1="20" y1="10" x2="20" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><circle cx="42" cy="60" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="20" y1="10" x2="20" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,1)}<path d="M20,38 A22,22 0 1,1 20,82" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(24,38,2)}`, steps: ['Straight line down','Circle clockwise on right'] },
+    'c': { svg: `<path d="M58,40 A20,22 0 1,0 58,66" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M58,40 A20,22 0 1,0 58,66" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(58,40,1)}`, steps: ['Curve counter-clockwise, open on right'] },
+    'd': { svg: `<circle cx="38" cy="55" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="60" y1="10" x2="60" y2="77" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M60,33 A22,22 0 1,0 60,77" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(60,33,1)}<line x1="60" y1="10" x2="60" y2="77" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(63,10,2)}`, steps: ['Circle counter-clockwise','Tall line down on the right'] },
+    'e': { svg: `<line x1="18" y1="52" x2="62" y2="52" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M62,52 A22,22 0 1,0 62,62" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="18" y1="52" x2="62" y2="52" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(18,52,1)}<path d="M62,52 A22,22 0 1,0 62,62" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(62,52,2)}`, steps: ['Horizontal bar across the middle', 'Curve up and all the way around, opening on right'] },
+    'f': { svg: `<path d="M55,20 Q55,10 43,10 Q30,10 30,22 L30,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="18" y1="42" x2="52" y2="42" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M55,20 Q55,10 43,10 Q30,10 30,22 L30,80" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(55,20,1)}<line x1="18" y1="42" x2="52" y2="42" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(18,42,2)}`, steps: ['Curve at top then stroke down','Crossbar across the middle'] },
+    'g': { svg: `<circle cx="38" cy="45" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><path d="M60,25 L60,80 Q60,90 40,90 Q22,90 22,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M60,25 A22,22 0 1,0 60,65" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(60,25,1)}<path d="M60,25 L60,80 Q60,90 40,90 Q22,90 22,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(63,25,2)}`, steps: ['Circle counter-clockwise','Stroke down from top with hook at bottom'] },
+    'h': { svg: `<line x1="20" y1="10" x2="20" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M20,42 Q30,28 45,28 Q62,28 62,42 L62,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="20" y1="10" x2="20" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,1)}<path d="M20,42 Q30,28 45,28 Q62,28 62,42 L62,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,42,2)}`, steps: ['Straight line down','Arch right then down'] },
+    'i': { svg: `<circle cx="40" cy="18" r="5" fill="#e2e8f0"/><line x1="40" y1="32" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="32" x2="40" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,32,1)}<circle cx="40" cy="18" r="6" fill="#10b981"/><text x="37" y="21" font-size="7" fill="white" font-weight="bold">2</text>`, steps: ['Stroke down','Dot above'] },
+    'j': { svg: `<circle cx="50" cy="18" r="5" fill="#e2e8f0"/><path d="M50,32 L50,70 Q50,85 35,85 Q22,85 22,74" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M50,32 L50,70 Q50,85 35,85 Q22,85 22,74" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(50,32,1)}<circle cx="50" cy="18" r="6" fill="#10b981"/><text x="47" y="21" font-size="7" fill="white" font-weight="bold">2</text>`, steps: ['Stroke down and hook left','Dot above'] },
+    'k': { svg: `<line x1="20" y1="10" x2="20" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="32" x2="20" y2="56" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="56" x2="60" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="20" y1="10" x2="20" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,10,1)}<line x1="60" y1="32" x2="20" y2="56" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(60,32,2)}<line x1="20" y1="56" x2="60" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,56,3)}`, steps: ['Straight line down','Diagonal to middle','Diagonal to bottom-right'] },
+    'l': { svg: `<path d="M40,10 L40,75 Q40,82 47,82" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M40,10 L40,75 Q40,82 47,82" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(40,10,1)}`, steps: ['Straight line down with small curve at bottom'] },
+    'm': { svg: `<line x1="15" y1="35" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,35 Q22,20 38,20 Q52,28 52,38 L52,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M52,35 Q58,22 65,25 Q68,35 65,45 L62,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="35" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,35,1)}<path d="M15,35 Q22,20 38,20 Q52,28 52,38 L52,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,32,2)}<path d="M52,35 Q58,22 65,25 Q68,35 65,45 L62,80" stroke="#f59e0b" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(52,35,3)}`, steps: ['Left stroke down','First arch and down','Second arch and down'] },
+    'n': { svg: `<line x1="15" y1="35" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M15,35 Q25,20 42,20 Q60,20 60,35 L60,80" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="15" y1="35" x2="15" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,35,1)}<path d="M15,35 Q25,20 42,20 Q60,20 60,35 L60,80" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,32,2)}`, steps: ['Straight line down','Arch right then down'] },
+    'o': { svg: `<ellipse cx="40" cy="55" rx="23" ry="25" stroke="#e2e8f0" stroke-width="6" fill="none"/><path d="M40,30 C63,30 63,80 40,80 C17,80 17,30 40,30" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(40,30,1)}`, steps: ['Full oval, clockwise from top'] },
+    'p': { svg: `<line x1="20" y1="30" x2="20" y2="82" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><circle cx="42" cy="52" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="20" y1="30" x2="20" y2="82" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,30,1)}<path d="M42,30 C65,30 65,74 42,74 C19,74 19,30 42,30" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(42,30,2)}`, steps: ['Line down past baseline','Circle to the right'] },
+    'q': { svg: `<circle cx="38" cy="52" r="22" stroke="#e2e8f0" stroke-width="6" fill="none"/><line x1="60" y1="30" x2="60" y2="82" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M60,32 A22,22 0 1,0 60,72" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(60,32,1)}<line x1="60" y1="30" x2="60" y2="82" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(63,30,2)}`, steps: ['Circle counter-clockwise','Stroke down past baseline on right'] },
+    'r': { svg: `<line x1="20" y1="35" x2="20" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><path d="M20,35 Q30,22 50,25" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><line x1="20" y1="35" x2="20" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(20,35,1)}<path d="M20,35 Q30,22 50,25" stroke="#10b981" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(20,38,2)}`, steps: ['Straight line down','Short curve right at top'] },
+    's': { svg: `<path d="M58,40 Q58,32 43,32 Q28,32 28,46 Q28,58 43,58 Q58,58 58,70 Q58,78 43,78 Q28,78 28,70" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M58,40 Q58,32 43,32 Q28,32 28,46 Q28,58 43,58 Q58,58 58,70 Q58,78 43,78 Q28,78 28,70" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(58,40,1)}`, steps: ['S-curve from top-right to bottom-left'] },
+    't': { svg: `<line x1="40" y1="15" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="22" y1="40" x2="60" y2="40" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="15" x2="40" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,15,1)}<line x1="22" y1="40" x2="60" y2="40" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(22,40,2)}`, steps: ['Straight line down','Crossbar across'] },
+    'u': { svg: `<path d="M15,32 L15,65 Q15,82 40,82 Q65,82 65,65 L65,32" stroke="#e2e8f0" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M15,32 L15,65 Q15,82 40,82 Q65,82 65,65" stroke="#fb7185" stroke-width="3.5" fill="none" stroke-linecap="round"/>${_bd(15,32,1)}<line x1="65" y1="65" x2="65" y2="32" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,65,2)}`, steps: ['Down and curve at bottom','Up on the right'] },
+    'v': { svg: `<line x1="15" y1="32" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="32" x2="40" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="32" x2="40" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,32,1)}<line x1="65" y1="32" x2="40" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,32,2)}`, steps: ['Left diagonal down','Right diagonal down'] },
+    'w': { svg: `<line x1="10" y1="32" x2="25" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="25" y1="80" x2="40" y2="48" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="40" y1="48" x2="55" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="55" y1="80" x2="70" y2="32" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="32" x2="25" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(10,32,1)}<line x1="25" y1="80" x2="40" y2="48" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(25,80,2)}<line x1="40" y1="48" x2="55" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(40,48,3)}<line x1="55" y1="80" x2="70" y2="32" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round"/>${_bd(55,80,4)}`, steps: ['Diagonal down','Up to center','Diagonal down','Up to finish'] },
+    'x': { svg: `<line x1="15" y1="32" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="32" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="32" x2="65" y2="80" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,32,1)}<line x1="65" y1="32" x2="15" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,32,2)}`, steps: ['Diagonal down-right','Diagonal down-left'] },
+    'y': { svg: `<line x1="15" y1="32" x2="40" y2="62" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="32" x2="30" y2="85" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="32" x2="40" y2="62" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,32,1)}<line x1="65" y1="32" x2="30" y2="85" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,32,2)}`, steps: ['Left diagonal to center','Right diagonal and tail below'] },
+    'z': { svg: `<line x1="15" y1="32" x2="65" y2="32" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="65" y1="32" x2="15" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="80" x2="65" y2="80" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="32" x2="65" y2="32" stroke="#fb7185" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,32,1)}<line x1="65" y1="32" x2="15" y2="80" stroke="#10b981" stroke-width="3.5" stroke-linecap="round"/>${_bd(65,32,2)}<line x1="15" y1="80" x2="65" y2="80" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>${_bd(15,80,3)}`, steps: ['Top line right','Diagonal down-left','Bottom line right'] },
+  };
+
+  // ════════════════════════════════════════════════════════
+  // LESSON DATA — 챕터마다 이 블록만 교체
+  // ════════════════════════════════════════════════════════
+  const lessonData = {
+    // E words — { word, emoji, id, imgUrl }
+    aWords: [
+      { word: 'egg', emoji: '🥚', id: 'pre_ch03_mem_01', imgUrl: '' },
+      { word: 'elephant', emoji: '🐘', id: 'pre_ch03_mem_02', imgUrl: '' },
+      { word: 'envelope', emoji: '✉️', id: 'pre_ch03_mem_03', imgUrl: '' },
+    ].filter(item => item.word !== ''),
+    // F words — { word, emoji, id, imgUrl }
+    bWords: [
+      { word: 'fish', emoji: '🐟', id: 'pre_ch03_mem_04', imgUrl: '' },
+      { word: 'frog', emoji: '🐸', id: 'pre_ch03_mem_05', imgUrl: '' },
+      { word: 'fan', emoji: '🌬️', id: 'pre_ch03_mem_06', imgUrl: '' },
+    ].filter(item => item.word !== ''),
+    //  words — optional (empty for 2-letter chapters)
+    cWords: [
+      { word: '', emoji: '', id: 'pre_ch03_mem_07', imgUrl: '' },
+      { word: '', emoji: '', id: 'pre_ch03_mem_08', imgUrl: '' },
+      { word: '', emoji: '', id: 'pre_ch03_mem_09', imgUrl: '' },
+    ].filter(item => item.word !== ''),
+    // Picture Match words — { word, emoji, id, imgUrl }
+    pictureMatch: [
+      { word: 'egg', emoji: '🥚', id: 'pre_ch03_pic_01', imgUrl: '' },
+      { word: 'elephant', emoji: '🐘', id: 'pre_ch03_pic_02', imgUrl: '' },
+      { word: 'fish', emoji: '🐟', id: 'pre_ch03_pic_03', imgUrl: '' },
+      { word: 'frog', emoji: '🐸', id: 'pre_ch03_pic_04', imgUrl: '' },
+      { word: 'and', emoji: '🔤', id: 'pre_ch03_pic_05', imgUrl: '' },
+      { word: 'in', emoji: '🔤', id: 'pre_ch03_pic_06', imgUrl: '' },
+    ].filter(item => item.word !== ''),
+  };
+  // Memory Game pairs — built from word arrays so empty slots are never shown
+  lessonData.memoryPairs = [
+    ...lessonData.aWords.map((item, i) => ({ letter: i%2===0 ? 'E' : 'e', word: item.word, emoji: item.emoji, id: item.id, imgUrl: '' })),
+    ...lessonData.bWords.map((item, i) => ({ letter: i%2===0 ? 'F' : 'f', word: item.word, emoji: item.emoji, id: item.id, imgUrl: '' })),
+    ...lessonData.cWords.map((item, i) => ({ letter: i%2===0 ? '' : '', word: item.word, emoji: item.emoji, id: item.id, imgUrl: '' })),
+  ];
+  // ════════════════════════════════════════════════════════
+
+  // ── App Root ──
+  function appRoot() {
+    return {
+      // tab moved to Alpine.store('nav')
+      activeGame: 'tracing',
+      completedTabs: new Set(),
+      tabs: [
+        { id: 'letter',     label: '✏️ Letter' },
+        { id: 'sound',      label: '🔊 Sound & Words' },
+        { id: 'song',       label: '🎵 Song' },
+        { id: 'speaking',   label: '🗣️ Speaking' },
+        { id: 'activities', label: '🎮 Activities' },
+      ],
+      games: [
+        { id: 'tracing', label: '✏️ Tracing' },
+        { id: 'memory',  label: '🧠 Memory' },
+        { id: 'picture', label: '🖼️ Picture Match' },
+      ],
+      allWords: [...lessonData.aWords, ...lessonData.bWords, ...lessonData.cWords].filter(item => item.word !== ''),
+      get progressPct() {
+        return Math.round((this.completedTabs.size / this.tabs.length) * 100);
+      },
+      init() {
+        Alpine.store('nav', { tab: 'letter' });
+        window.markTabComplete = (tabId) => this.markTabComplete(tabId);
+        window.setTab = (id) => this.setTab(id);
+      },
+      setTab(id) {
+        Alpine.store('nav').tab = id;
+      },
+      markTabComplete(tabId) {
+        this.completedTabs.add(tabId);
+        this.completedTabs = new Set(this.completedTabs);
+      },
+    }
+  }
+
+  // ── Read-Aloud: play parts split by "/" with 1-second pauses ──
+  function _playParts(parts, idx, onDone) {
+    if (idx >= parts.length) { if (onDone) setTimeout(onDone, 1000); return; }
+    const u = new SpeechSynthesisUtterance(parts[idx]);
+    u.lang = 'en-US'; u.rate = speechRate;
+    u.onend = () => setTimeout(() => _playParts(parts, idx + 1, onDone), 1000);
+    speechSynthesis.speak(u);
+  }
+  function speakWithPauses(text) {
+    speechSynthesis.cancel();
+    _playParts(text.split('/').map(p => p.trim()).filter(p => p), 0, null);
+  }
+  function readAloudAll(s1, s2) {
+    speechSynthesis.cancel();
+    const p1 = s1.split('/').map(p => p.trim()).filter(p => p);
+    const p2 = s2.split('/').map(p => p.trim()).filter(p => p);
+    _playParts(p1, 0, () => _playParts(p2, 0, null));
+  }
+
+  // ── Tracing canvas (mini, on Letter tab) ──
+  function tracingGame(letter) {
+    return {
+      letter,
+      drawing: false,
+      done: false,
+      strokes: 0,
+      init() {
+        this.$nextTick(() => this.clearCanvas());
+      },
+      startDraw(e) {
+        this.drawing = true;
+        const ctx = this.$refs.canvas.getContext('2d');
+        const rect = this.$refs.canvas.getBoundingClientRect();
+        const scaleX = this.$refs.canvas.width / rect.width;
+        const scaleY = this.$refs.canvas.height / rect.height;
+        const x = ((e.clientX || e.touches[0].clientX) - rect.left) * scaleX;
+        const y = ((e.clientY || e.touches[0].clientY) - rect.top) * scaleY;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#fb7185';
+        ctx.lineCap = 'round';
+        this.strokes++;
+      },
+      draw(e) {
+        if (!this.drawing) return;
+        const ctx = this.$refs.canvas.getContext('2d');
+        const rect = this.$refs.canvas.getBoundingClientRect();
+        const scaleX = this.$refs.canvas.width / rect.width;
+        const scaleY = this.$refs.canvas.height / rect.height;
+        const x = ((e.clientX || e.touches[0].clientX) - rect.left) * scaleX;
+        const y = ((e.clientY || e.touches[0].clientY) - rect.top) * scaleY;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      },
+      endDraw() { this.drawing = false; },
+      clearCanvas() {
+        const canvas = this.$refs.canvas;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.font = `bold ${Math.floor(canvas.height * 0.72)}px Quicksand, sans-serif`;
+        ctx.fillStyle = 'rgba(251, 113, 133, 0.13)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.letter, canvas.width / 2, canvas.height / 2);
+        ctx.restore();
+        this.strokes = 0;
+        this.done = false;
+      },
+      checkDone() {
+        if (this.strokes > 0) {
+          this.done = true;
+          fireConfetti();
+          speak('Great job!');
+        }
+      }
+    }
+  }
+
+  // ── Tracing activity (Activities tab) ──
+  function tracingActivity() {
+    return {
+      traceLetters: ['E', 'e', 'F', 'f', '', ''].filter(l => l !== ''),
+      currentIdx: 0,
+      started: false,
+      allDone: false,
+      drawing: false,
+      startTracing() {
+        this.started = true;
+        this.$nextTick(() => this.clearCanvas());
+      },
+      startDraw(e) {
+        this.drawing = true;
+        const canvas = this.$refs.tracingCanvas;
+        const ctx = canvas.getContext('2d');
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = ((e.clientX || e.touches[0].clientX) - rect.left) * scaleX;
+        const y = ((e.clientY || e.touches[0].clientY) - rect.top) * scaleY;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#fb7185';
+        ctx.lineCap = 'round';
+      },
+      draw(e) {
+        if (!this.drawing) return;
+        const canvas = this.$refs.tracingCanvas;
+        const ctx = canvas.getContext('2d');
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = ((e.clientX || e.touches[0].clientX) - rect.left) * scaleX;
+        const y = ((e.clientY || e.touches[0].clientY) - rect.top) * scaleY;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      },
+      endDraw() { this.drawing = false; },
+      clearCanvas() {
+        const canvas = this.$refs.tracingCanvas;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.font = `bold ${Math.floor(canvas.height * 0.72)}px Quicksand, sans-serif`;
+        ctx.fillStyle = 'rgba(251, 113, 133, 0.13)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.traceLetters[this.currentIdx], canvas.width / 2, canvas.height / 2);
+        ctx.restore();
+      },
+      nextLetter() {
+        speak(this.traceLetters[this.currentIdx]);
+        if (this.currentIdx < this.traceLetters.length - 1) {
+          this.currentIdx++;
+          this.$nextTick(() => this.clearCanvas());
+        } else {
+          this.allDone = true;
+          markTabComplete('activities');
+          fireConfetti();
+        }
+      },
+      resetTracing() {
+        this.currentIdx = 0;
+        this.allDone = false;
+        this.started = false;
+      }
+    }
+  }
+
+  // ── Memory Game ──
+  function memoryGame() {
+    return {
+      started: false,
+      gameComplete: false,
+      board: [],
+      selected: [],
+      matched: 0,
+      moves: 0,
+      flipping: false,
+      get totalPairs() { return lessonData.memoryPairs.length; },
+      startGame() {
+        this.started = true;
+        this.gameComplete = false;
+        this.matched = 0;
+        this.moves = 0;
+        this.selected = [];
+        this.flipping = false;
+        const pairs = lessonData.memoryPairs.map(p => ([
+          { display: p.letter, word: p.word, pairId: p.word, flipped: false, matched: false, isLetter: true, emoji: '', imgUrl: '', id: '' },
+          { display: '', word: p.word, pairId: p.word, flipped: false, matched: false, isLetter: false, emoji: p.emoji, imgUrl: p.imgUrl, id: p.id },
+        ])).flat();
+        this.board = pairs.sort(() => Math.random() - 0.5);
+      },
+      flipCard(i) {
+        const card = this.board[i];
+        if (card.flipped || card.matched || this.flipping) return;
+        card.flipped = true;
+        speak(card.word);
+        this.selected.push(i);
+        if (this.selected.length === 2) {
+          this.moves++;
+          this.flipping = true;
+          const [a, b] = this.selected;
+          if (this.board[a].pairId === this.board[b].pairId && a !== b) {
+            setTimeout(() => {
+              this.board[a].matched = true;
+              this.board[b].matched = true;
+              this.matched++;
+              this.selected = [];
+              this.flipping = false;
+              if (this.matched === lessonData.memoryPairs.length) {
+                this.gameComplete = true;
+                markTabComplete('activities');
+                fireConfetti();
+              }
+            }, 600);
+          } else {
+            setTimeout(() => {
+              this.board[a].flipped = false;
+              this.board[b].flipped = false;
+              this.selected = [];
+              this.flipping = false;
+            }, 2000);
+          }
+        }
+      },
+      resetGame() {
+        this.started = false;
+        this.gameComplete = false;
+      }
+    }
+  }
+
+  // ── Picture Match ──
+  function pictureMatch() {
+    return {
+      started: false,
+      gameComplete: false,
+      words: [],
+      currentIdx: 0,
+      shuffledPics: [],
+      correctPick: null,
+      wrongPick: null,
+      get currentWord() { return this.words[this.currentIdx] || {}; },
+      startGame() {
+        this.started = true;
+        this.gameComplete = false;
+        this.currentIdx = 0;
+        this.correctPick = null;
+        this.wrongPick = null;
+        this.words = [...lessonData.pictureMatch].sort(() => Math.random() - 0.5);
+        this.shuffledPics = [...lessonData.pictureMatch].sort(() => Math.random() - 0.5);
+      },
+      checkMatch(item) {
+        if (this.correctPick) return;
+        speak(item.word);
+        const correct = item.word === this.currentWord.word;
+        if (correct) {
+          this.correctPick = item.word;
+          this.wrongPick = null;
+          fireConfetti();
+        } else {
+          this.wrongPick = item.word;
+          setTimeout(() => { this.wrongPick = null; }, 700);
+        }
+      },
+      nextWord() {
+        this.correctPick = null;
+        this.wrongPick = null;
+        if (this.currentIdx < this.words.length - 1) {
+          this.currentIdx++;
+          this.shuffledPics = [...lessonData.pictureMatch].sort(() => Math.random() - 0.5);
+        } else {
+          this.gameComplete = true;
+          markTabComplete('activities');
+          fireConfetti();
+        }
+      },
+      resetGame() {
+        this.started = false;
+        this.gameComplete = false;
+      }
+    }
+  }
+</script>
+
+</div><!-- /appRoot -->
+<script>
+  const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+  if (!isChrome) {
+    document.querySelectorAll('.speech-note').forEach(el => el.style.display = 'block');
+  }
+</script>
+
+</body>
+</html>
