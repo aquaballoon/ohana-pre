@@ -174,6 +174,17 @@
       padding: 0.15rem 0.5rem;
       display: inline-block;
     }
+    .letter-tag-lg {
+      background: rgba(255,255,255,0.65);
+      color: var(--brand-dark);
+      border-radius: 0.6rem;
+      font-weight: 800;
+      font-size: 1.9rem;
+      line-height: 1;
+      padding: 0.2rem 0.55rem;
+      display: inline-block;
+      letter-spacing: -0.01em;
+    }
 
     /* ── Scroll fade-in observer ── */
     .reveal {
@@ -261,11 +272,6 @@
       <a href="#chapters" class="btn-primary" style="animation: pulse-glow 2s ease-in-out infinite;">
         🎯 Start Learning
       </a>
-      <a href="#outcomes" style="border:2px solid var(--brand); color:var(--brand-dark); border-radius:999px; font-weight:700; padding:0.85rem 2rem; font-size:1rem; display:inline-flex; align-items:center; gap:0.4rem; transition:all 0.2s; text-decoration:none;"
-         onmouseover="this.style.background='var(--brand-light)'"
-         onmouseout="this.style.background='transparent'">
-        ✨ See Outcomes
-      </a>
     </div>
 
   </div>
@@ -287,12 +293,6 @@
         <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">80<span style="font-size:1.2rem;">+</span></div>
         <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Phonics Words</div>
         <div style="font-size:1.4rem; margin-top:4px;">🔊</div>
-      </div>
-
-      <div class="stat-box reveal" style="animation-delay:0.15s;">
-        <div style="font-size:2.2rem; font-weight:800; color:var(--brand-dark);">50<span style="font-size:1.2rem;">+</span></div>
-        <div style="font-size:0.85rem; color:#64748b; font-weight:600; margin-top:4px;">Daily Expressions</div>
-        <div style="font-size:1.4rem; margin-top:4px;">💬</div>
       </div>
 
       <div class="stat-box reveal" style="animation-delay:0.2s;">
@@ -365,105 +365,6 @@
 </section>
 
 
-<!-- ════════════════════════════ OUTCOMES ════════════════════════════ -->
-<section id="outcomes" style="background:#fff; padding:4rem 1.25rem;">
-  <div class="max-w-4xl mx-auto">
-
-    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
-      <p style="font-weight:700; color:var(--brand); font-size:0.9rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem;">Learning Outcomes</p>
-      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem); font-weight:800; color:#1e293b; line-height:1.2;">What Your Child Can Do<br>After Completing Pre-Level</h2>
-    </div>
-
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:1.5rem; margin-bottom:2.5rem;">
-
-      <!-- Literacy -->
-      <div class="reveal" style="background:var(--brand-light); border-radius:1.5rem; padding:1.75rem; border:2px solid var(--brand-border);">
-        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-          <span style="font-size:1.75rem;">📖</span>
-          <span style="font-weight:800; color:var(--brand-dark); font-size:1rem;">Literacy</span>
-        </div>
-        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
-            Recognize and write all 26 letters (uppercase & lowercase)
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
-            Sound out 13 key phonics sounds with correct pronunciation
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
-            Read 44 sight words independently (the, a, I, am, you, is, in…)
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:var(--brand); font-size:1rem; flex-shrink:0;">✔</span>
-            Blend CVC words: <em>cat, bag, pin, hot, sun</em>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Communication -->
-      <div class="reveal" style="background:var(--green-light); border-radius:1.5rem; padding:1.75rem; border:2px solid #a7f3d0; animation-delay:0.1s;">
-        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-          <span style="font-size:1.75rem;">💬</span>
-          <span style="font-weight:800; color:#065f46; font-size:1rem;">Communication</span>
-        </div>
-        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
-            Introduce themselves: <em>"Hello! My name is ___."</em>
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
-            Express feelings: <em>"I'm happy / sad / fine."</em>
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
-            Name colors, animals, food, body parts, days of the week
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
-            Count from 1 to 10 and ask <em>"How many?"</em>
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#34d399; font-size:1rem; flex-shrink:0;">✔</span>
-            Talk about the weather and classroom objects
-          </li>
-        </ul>
-      </div>
-
-      <!-- Ready for Level 1 -->
-      <div class="reveal" style="background:var(--purple-light); border-radius:1.5rem; padding:1.75rem; border:2px solid #ddd6fe; animation-delay:0.2s;">
-        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-          <span style="font-size:1.75rem;">🚀</span>
-          <span style="font-weight:800; color:#4c1d95; font-size:1rem;">Ready for Level 1</span>
-        </div>
-        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.6rem;">
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
-            Knows 200+ words and expressions across 10 topics
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
-            Sing along to English songs and follow rhythm patterns
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
-            Confident speaking voice — zero fear of trying English
-          </li>
-          <li style="display:flex; align-items:flex-start; gap:0.5rem; font-size:0.9rem; color:#374151; font-weight:500;">
-            <span style="color:#a78bfa; font-size:1rem; flex-shrink:0;">✔</span>
-            Fully prepared for CEFR A1 (Level 1: Starter)
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
 <!-- ════════════════════════════ CHAPTER GRID ════════════════════════════ -->
 <section id="chapters" style="background:var(--page-bg); padding:4rem 1.25rem 5rem;">
   <div class="max-w-4xl mx-auto">
@@ -474,209 +375,173 @@
       <p style="color:#64748b; margin-top:0.75rem; font-weight:500;">Click any chapter to open the interactive lesson.</p>
     </div>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap:1rem;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:1rem;">
 
       <!-- Ch 1 -->
       <a href="pre_ch1.html" class="chapter-card reveal">
-        <div style="background:linear-gradient(135deg,#fff1f2,#fce7f3); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:0.06em;">Ch. 01</span>
-            <span style="font-size:1.4rem;">👋</span>
+        <div style="background:linear-gradient(135deg,#fff1f2,#fce7f3); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:0.06em;">Ch. 01</span>
+            <span style="font-size:1.2rem;">👋</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">A</span><span class="letter-tag">B</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg">A</span><span class="letter-tag-lg">B</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Hello, World!</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Hello · My name is · /æ/ /b/</div>
+          <div style="font-size:0.78rem; color:rgba(190,18,60,0.55); font-weight:700;">/æ/ &nbsp; /b/</div>
         </div>
       </a>
 
       <!-- Ch 2 -->
       <a href="pre_ch2.html" class="chapter-card reveal" style="animation-delay:0.05s;">
-        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a22); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#d97706; text-transform:uppercase; letter-spacing:0.06em;">Ch. 02</span>
-            <span style="font-size:1.4rem;">🔢</span>
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a44); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#d97706; text-transform:uppercase; letter-spacing:0.06em;">Ch. 02</span>
+            <span style="font-size:1.2rem;">🔢</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">C</span><span class="letter-tag">D</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#92400e;">C</span><span class="letter-tag-lg" style="color:#92400e;">D</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Numbers 1–5</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">One to five · /k/ /d/</div>
+          <div style="font-size:0.78rem; color:rgba(146,64,14,0.55); font-weight:700;">/k/ &nbsp; /d/</div>
         </div>
       </a>
 
       <!-- Ch 3 -->
       <a href="pre_ch3.html" class="chapter-card reveal" style="animation-delay:0.1s;">
-        <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d033); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#059669; text-transform:uppercase; letter-spacing:0.06em;">Ch. 03</span>
-            <span style="font-size:1.4rem;">😊</span>
+        <div style="background:linear-gradient(135deg,#d1fae5,#a7f3d055); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#059669; text-transform:uppercase; letter-spacing:0.06em;">Ch. 03</span>
+            <span style="font-size:1.2rem;">😊</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">E</span><span class="letter-tag">F</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#065f46;">E</span><span class="letter-tag-lg" style="color:#065f46;">F</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">How Are You?</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Feelings · Happy / Sad · /e/ /f/</div>
+          <div style="font-size:0.78rem; color:rgba(6,95,70,0.55); font-weight:700;">/e/ &nbsp; /f/</div>
         </div>
       </a>
 
       <!-- Ch 4 -->
       <a href="pre_ch4.html" class="chapter-card reveal" style="animation-delay:0.15s;">
-        <div style="background:linear-gradient(135deg,#ede9fe,#ddd6fe33); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.06em;">Ch. 04</span>
-            <span style="font-size:1.4rem;">🌈</span>
+        <div style="background:linear-gradient(135deg,#ede9fe,#ddd6fe55); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#7c3aed; text-transform:uppercase; letter-spacing:0.06em;">Ch. 04</span>
+            <span style="font-size:1.2rem;">🌈</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">G</span><span class="letter-tag">H</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#4c1d95;">G</span><span class="letter-tag-lg" style="color:#4c1d95;">H</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Colors</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Red, Blue, Yellow, Green · /g/ /h/</div>
+          <div style="font-size:0.78rem; color:rgba(76,29,149,0.55); font-weight:700;">/g/ &nbsp; /h/</div>
         </div>
       </a>
 
       <!-- Ch 5 -->
       <a href="pre_ch5.html" class="chapter-card reveal" style="animation-delay:0.05s;">
-        <div style="background:linear-gradient(135deg,#fce7f3,#fbcfe833); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#be185d; text-transform:uppercase; letter-spacing:0.06em;">Ch. 05</span>
-            <span style="font-size:1.4rem;">👨‍👩‍👧</span>
+        <div style="background:linear-gradient(135deg,#fce7f3,#fbcfe855); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#be185d; text-transform:uppercase; letter-spacing:0.06em;">Ch. 05</span>
+            <span style="font-size:1.2rem;">👨‍👩‍👧</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">I</span><span class="letter-tag">J</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#9d174d;">I</span><span class="letter-tag-lg" style="color:#9d174d;">J</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">My Family</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Mom, Dad, Sister, Brother · /ɪ/ /dʒ/</div>
+          <div style="font-size:0.78rem; color:rgba(157,23,77,0.55); font-weight:700;">/ɪ/ &nbsp; /dʒ/</div>
         </div>
       </a>
 
       <!-- Ch 6 -->
       <a href="pre_ch6.html" class="chapter-card reveal" style="animation-delay:0.1s;">
-        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a33); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#b45309; text-transform:uppercase; letter-spacing:0.06em;">Ch. 06</span>
-            <span style="font-size:1.4rem;">🔢</span>
+        <div style="background:linear-gradient(135deg,#fef9c3,#fde68a55); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#b45309; text-transform:uppercase; letter-spacing:0.06em;">Ch. 06</span>
+            <span style="font-size:1.2rem;">🔢</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">K</span><span class="letter-tag">L</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#78350f;">K</span><span class="letter-tag-lg" style="color:#78350f;">L</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Numbers 6–10</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Six to Ten · How many? · /k/ /l/</div>
+          <div style="font-size:0.78rem; color:rgba(120,53,15,0.55); font-weight:700;">/k/ &nbsp; /l/</div>
         </div>
       </a>
 
       <!-- Ch 7 -->
       <a href="pre_ch7.html" class="chapter-card reveal" style="animation-delay:0.15s;">
-        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae533); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#047857; text-transform:uppercase; letter-spacing:0.06em;">Ch. 07</span>
-            <span style="font-size:1.4rem;">🙌</span>
+        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae555); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#047857; text-transform:uppercase; letter-spacing:0.06em;">Ch. 07</span>
+            <span style="font-size:1.2rem;">🙌</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">M</span><span class="letter-tag">N</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#064e3b;">M</span><span class="letter-tag-lg" style="color:#064e3b;">N</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">My Body</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Head, Hand, Eye, Nose · /m/ /n/</div>
+          <div style="font-size:0.78rem; color:rgba(6,78,59,0.55); font-weight:700;">/m/ &nbsp; /n/</div>
         </div>
       </a>
 
       <!-- Ch 8 -->
       <a href="pre_ch8.html" class="chapter-card reveal" style="animation-delay:0.05s;">
-        <div style="background:linear-gradient(135deg,#fff1f2,#fecdd333); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:var(--brand-dark); text-transform:uppercase; letter-spacing:0.06em;">Ch. 08</span>
-            <span style="font-size:1.4rem;">🐾</span>
+        <div style="background:linear-gradient(135deg,#fff1f2,#fecdd355); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:var(--brand-dark); text-transform:uppercase; letter-spacing:0.06em;">Ch. 08</span>
+            <span style="font-size:1.2rem;">🐾</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">O</span><span class="letter-tag">P</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg">O</span><span class="letter-tag-lg">P</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Animals</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Cat, Dog, Bird, Fish · /ɒ/ /p/</div>
+          <div style="font-size:0.78rem; color:rgba(190,18,60,0.55); font-weight:700;">/ɒ/ &nbsp; /p/</div>
         </div>
       </a>
 
       <!-- Ch 9 -->
       <a href="pre_ch9.html" class="chapter-card reveal" style="animation-delay:0.1s;">
-        <div style="background:linear-gradient(135deg,#fef9ee,#fde68a22); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#92400e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 09</span>
-            <span style="font-size:1.4rem;">🍎</span>
+        <div style="background:linear-gradient(135deg,#fef9ee,#fde68a33); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#92400e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 09</span>
+            <span style="font-size:1.2rem;">🍎</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">Q</span><span class="letter-tag">R</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#78350f;">Q</span><span class="letter-tag-lg" style="color:#78350f;">R</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Food & Drinks</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Apple, Milk, Rice, Bread · /kw/ /r/</div>
+          <div style="font-size:0.78rem; color:rgba(120,53,15,0.55); font-weight:700;">/kw/ &nbsp; /r/</div>
         </div>
       </a>
 
       <!-- Ch 10 -->
       <a href="pre_ch10.html" class="chapter-card reveal" style="animation-delay:0.15s;">
-        <div style="background:linear-gradient(135deg,#eff6ff,#bfdbfe33); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:0.06em;">Ch. 10</span>
-            <span style="font-size:1.4rem;">🏫</span>
+        <div style="background:linear-gradient(135deg,#eff6ff,#bfdbfe55); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#1d4ed8; text-transform:uppercase; letter-spacing:0.06em;">Ch. 10</span>
+            <span style="font-size:1.2rem;">🏫</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">S</span><span class="letter-tag">T</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#1e3a8a;">S</span><span class="letter-tag-lg" style="color:#1e3a8a;">T</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Classroom</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Book, Pen, Desk, Bag · /s/ /t/</div>
+          <div style="font-size:0.78rem; color:rgba(30,58,138,0.55); font-weight:700;">/s/ &nbsp; /t/</div>
         </div>
       </a>
 
       <!-- Ch 11 -->
       <a href="pre_ch11.html" class="chapter-card reveal" style="animation-delay:0.05s;">
-        <div style="background:linear-gradient(135deg,#f0fdfa,#ccfbf133); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#0f766e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 11</span>
-            <span style="font-size:1.4rem;">🌤️</span>
+        <div style="background:linear-gradient(135deg,#f0fdfa,#ccfbf155); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#0f766e; text-transform:uppercase; letter-spacing:0.06em;">Ch. 11</span>
+            <span style="font-size:1.2rem;">🌤️</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">U</span><span class="letter-tag">V</span><span class="letter-tag">W</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#134e4a;">U</span><span class="letter-tag-lg" style="color:#134e4a;">V</span><span class="letter-tag-lg" style="color:#134e4a;">W</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Weather</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Sunny, Rainy, Windy, Hot · /ʌ/ /v/ /w/</div>
+          <div style="font-size:0.78rem; color:rgba(19,78,74,0.55); font-weight:700;">/ʌ/ &nbsp; /v/ &nbsp; /w/</div>
         </div>
       </a>
 
       <!-- Ch 12 -->
       <a href="pre_ch12.html" class="chapter-card reveal" style="animation-delay:0.1s;">
-        <div style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff33); padding:1.25rem 1.25rem 0.75rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-            <span style="font-size:0.75rem; font-weight:700; color:#7e22ce; text-transform:uppercase; letter-spacing:0.06em;">Ch. 12</span>
-            <span style="font-size:1.4rem;">📅</span>
+        <div style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff55); padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.9rem;">
+            <span style="font-size:0.72rem; font-weight:700; color:#7e22ce; text-transform:uppercase; letter-spacing:0.06em;">Ch. 12</span>
+            <span style="font-size:1.2rem;">📅</span>
           </div>
-          <div style="display:flex; gap:0.3rem; flex-wrap:wrap;">
-            <span class="letter-tag">X</span><span class="letter-tag">Y</span><span class="letter-tag">Z</span>
+          <div style="display:flex; gap:0.35rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <span class="letter-tag-lg" style="color:#4c1d95;">X</span><span class="letter-tag-lg" style="color:#4c1d95;">Y</span><span class="letter-tag-lg" style="color:#4c1d95;">Z</span>
           </div>
-        </div>
-        <div style="padding:0.75rem 1.25rem 1rem;">
-          <div style="font-weight:800; color:#1e293b; font-size:0.95rem; margin-bottom:0.3rem;">Days of the Week</div>
-          <div style="font-size:0.8rem; color:#64748b; font-weight:500;">Monday–Sunday · /ks/ /j/ /z/</div>
+          <div style="font-size:0.78rem; color:rgba(76,29,149,0.55); font-weight:700;">/ks/ &nbsp; /j/ &nbsp; /z/</div>
         </div>
       </a>
 
